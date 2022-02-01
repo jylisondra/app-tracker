@@ -8,17 +8,17 @@
 
 :root {
   /* colors */
-  --bg-blue: #f1f5ff;
+  --bg-blue: #e0fbfc;
   --nav-blue: #dae0f0;
   --card-bg: #ffffff;
   --pending-yellow: #f1cf76;
   --intervew-blue: #7689f1;
   --declined-red: #fe6969;
-  --button-bg: #3c5082;
+  --button-bg: #ee6c4d;
 
   /* fonts */
   --heading-font: 'Varela Round', Sans-Serif;
-  --font-color: rgb(21, 21, 56);
+  --font-color: #293241;
   --nav-height: 5rem;
 }
 

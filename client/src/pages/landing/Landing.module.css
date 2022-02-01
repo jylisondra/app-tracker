@@ -25,7 +25,7 @@
 }
 
 .subtitle {
-  color: rgb(175, 176, 196);
+  color: #7a9db1;
   padding-bottom: 20px;
   font-size: 1.8em;
 }
@@ -44,7 +44,4 @@
 
 .main_img {
   flex-basis: 50%;
-}
-
-.img {
 }

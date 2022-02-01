@@ -9,8 +9,8 @@ export default function landing() {
     <main>
       <div className={styles.container}>
         <div className={styles.info}>
-          <h1 className={styles.title}>Jobbr.</h1>
-          <p className={styles.subtitle}>The Job Application Tracker</p>
+          <h1 className={styles.title}>AppTrak.</h1>
+          <p className={styles.subtitle}>A Job Application Tracker</p>
           <p className={styles.description}>
             Lorem ipsum dolor sit, amet consectetur adipisicing elit.
             Perferendis, voluptate, quis atque explicabo autem nam alias ipsum
@@ -18,7 +18,7 @@ export default function landing() {
             vel. Minus, animi inventore!
           </p>
           <Link to="/register" className={styles.btn}>
-            Login/Register
+            Get Started Now
           </Link>
         </div>
         <div className={`${styles.main_img} ${styles.img}`}>
