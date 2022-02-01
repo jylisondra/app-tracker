@@ -7,7 +7,7 @@ export default function Error() {
   return (
     <main className={styles.container}>
       <h1 className={styles.title}>404 Page Not Found</h1>
-      <div className="img">
+      <div className={styles.img_container}>
         <img src={error} alt="error" className={styles.img} />
       </div>
     </main>
