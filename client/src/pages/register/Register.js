@@ -39,7 +39,7 @@ export default function Register() {
             Not signed up?
             <button
               onClick={toggleStatus}
-              className={`${styles.btn_toggle} ${styles.btn}`}
+              className={`${styles.btn_toggle} ${styles.btn} ${styles.btn_link}`}
             >
               Register
             </button>
@@ -49,12 +49,20 @@ export default function Register() {
             Already signed up?
             <button
               onClick={toggleStatus}
-              className={`${styles.btn_toggle} ${styles.btn}`}
+              className={`${styles.btn_toggle} ${styles.btn} ${styles.btn_link}`}
             >
               Login
             </button>
           </p>
         )}
+        <p>
+          Demo as
+          <button
+            className={`${styles.btn_link} ${styles.btn_guest} ${styles.btn}`}
+          >
+            Guest
+          </button>
+        </p>
       </div>
     </form>
   );

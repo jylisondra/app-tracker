@@ -41,6 +41,13 @@ h1 {
 .btn {
   cursor: pointer;
 }
+
+.btn_link {
+  border: none;
+  background: none;
+  font: inherit;
+  color: var(--button-bg);
+}
 .btn_submit {
   border: none;
   font: inherit;
@@ -52,8 +59,5 @@ h1 {
 }
 
 .btn_toggle {
-  border: none;
-  background: none;
-  color: var(--button-bg);
-  font: inherit;
+  margin-bottom: 4px;
 }
