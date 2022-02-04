@@ -1,0 +1,15 @@
+.form_register {
+  width: 650px;
+  margin: auto;
+}
+
+.form_label {
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+.form_input {
+  width: 80%;
+  height: 35px;
+  margin-bottom: 20px;
+}
