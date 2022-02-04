@@ -6,18 +6,14 @@ export default function FormRow({
   name,
   handleChange,
   labelName,
-  className,
 }) {
   return (
-    <div className={`${styles[className]}`}>
-      <label
-        htmlFor={name}
-        className={`${styles[className]} ${styles.form_label}`}
-      >
+    <div>
+      <label htmlFor={name} className={`${styles.form_label}`}>
         {labelName || name}
       </label>
       <input
-        className={`${styles[className]} ${styles.form_input}`}
+        className={`${styles.form_input}`}
         type={type}
         name={name}
         value={value}
