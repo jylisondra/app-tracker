@@ -16,21 +16,21 @@ export default function Register() {
   // global state
   const { isLoading, showAlert, displayAlertDanger } = useAppContext();
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    const { name, email, password, isMember } = values;
-    if (!email || password || (!isMember && !name)) {
-      displayAlertDanger();
-      return;
-    }
+  const toggleStatus = () => {
+    setValues({ ...values, isMember: !values.isMember });
   };
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
-  const toggleStatus = () => {
-    setValues({ ...values, isMember: !values.isMember });
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const { name, email, password, isMember } = values;
+    if (!email || !password || (!isMember && !name)) {
+      displayAlertDanger();
+      return;
+    }
   };
 
   return (
@@ -78,6 +78,7 @@ export default function Register() {
           <p>
             Not signed up?
             <button
+              type="button"
               onClick={toggleStatus}
               className={`${styles.btn_toggle} ${styles.btn} ${styles.btn_link}`}
             >
@@ -88,6 +89,7 @@ export default function Register() {
           <p>
             Already signed up?
             <button
+              type="button"
               onClick={toggleStatus}
               className={`${styles.btn_toggle} ${styles.btn} ${styles.btn_link}`}
             >
@@ -98,6 +100,7 @@ export default function Register() {
         <p>
           Try out as
           <button
+            type="button"
             className={`${styles.btn_link} ${styles.btn_guest} ${styles.btn}`}
           >
             Guest
