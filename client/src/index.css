@@ -8,13 +8,14 @@
 
 :root {
   /* colors */
-  --bg-blue: #e0fbfc;
+  --bg-blue: #e4f6f7;
   --nav-blue: #dae0f0;
   --card-bg: #ffffff;
   --pending-yellow: #f1cf76;
   --intervew-blue: #7689f1;
   --declined-red: #fe6969;
   --button-bg: #ee6c4d;
+  --button-hover: #e25430;
 
   /* fonts */
   --heading-font: 'Varela Round', Sans-Serif;

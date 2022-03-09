@@ -1,4 +1,4 @@
-.container {
+.form {
   height: 100vh;
   display: flex;
   align-items: center;
@@ -56,6 +56,12 @@ h1 {
   color: white;
   background-color: var(--button-bg);
   border-radius: 8px;
+  transition: 200ms ease-in-out;
+}
+
+.btn_submit:hover {
+  background-color: var(--button-hover);
+  transition: 200ms ease-in-out;
 }
 
 .btn_toggle {

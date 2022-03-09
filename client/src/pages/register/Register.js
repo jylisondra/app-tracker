@@ -1,40 +1,80 @@
 import { useState } from 'react';
-
-// stylces
 import styles from './Register.module.css';
+import FormRow from '../../components/formRow/FormRow';
+import Alert from '../../components/alert/Alert';
+import { useAppContext } from '../../context/AppContext';
+
+const initialState = {
+  name: '',
+  email: '',
+  password: '',
+  isMember: true,
+};
 
 export default function Register() {
-  const [memberStatus, setStatus] = useState(true);
+  const [values, setValues] = useState(initialState);
+  // global state
+  const { isLoading, showAlert, displayAlertDanger } = useAppContext();
 
-  const toggleStatus = () => setStatus((prev) => !prev);
-
-  const handleSubmit = (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
+    const { name, email, password, isMember } = values;
+    if (!email || password || (!isMember && !name)) {
+      displayAlertDanger();
+      return;
+    }
+  };
+
+  const handleChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
+
+  const toggleStatus = () => {
+    setValues({ ...values, isMember: !values.isMember });
   };
 
   return (
-    <form onSubmit={handleSubmit} className={styles.container}>
+    <form onSubmit={onSubmit} className={styles.form}>
       <div className={styles.card}>
         <span className={styles.logo}>AppTrak.</span>
-        {memberStatus ? <h1>Login</h1> : <h1>Register</h1>}
-        {!memberStatus && (
-          <label htmlFor="name" className={styles.form_label}>
-            Name
-          </label>
-        )}
-        {!memberStatus && (
-          <input type="text" name="name" className={styles.form_input} />
+        {values.isMember ? <h1>Login</h1> : <h1>Register</h1>}
+        {showAlert && <Alert />}
+        {!values.isMember && (
+          <>
+            <label htmlFor="name" className={styles.form_label}>
+              Name
+            </label>
+            <input
+              type="text"
+              name="name"
+              value={values.name}
+              onChange={handleChange}
+              className={styles.form_input}
+            />
+          </>
         )}
         <label htmlFor="email" className={styles.form_label}>
           Email
         </label>
-        <input type="text" name="email" className={styles.form_input} />
+        <input
+          type="email"
+          name="email"
+          value={values.email}
+          onChange={handleChange}
+          className={styles.form_input}
+        />
         <label htmlFor="password" className={styles.form_label}>
           Password
         </label>
-        <input type="password" name="password" className={styles.form_input} />
+        <input
+          type="password"
+          name="password"
+          value={values.password}
+          onChange={handleChange}
+          className={styles.form_input}
+        />
         <button className={`${styles.btn_submit} ${styles.btn}`}>Submit</button>
-        {memberStatus ? (
+        {values.isMember ? (
           <p>
             Not signed up?
             <button
@@ -56,7 +96,7 @@ export default function Register() {
           </p>
         )}
         <p>
-          Demo as
+          Try out as
           <button
             className={`${styles.btn_link} ${styles.btn_guest} ${styles.btn}`}
           >
