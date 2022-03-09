@@ -1,0 +1,19 @@
+.alert {
+  width: 80%;
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+  border-radius: 5px;
+  color: rgb(252, 248, 248);
+}
+
+.alert_danger {
+  background: rgb(209, 39, 39);
+}
+
+.alert_confirm {
+  background: rgb(151, 211, 151);
+  color: rgb(255, 251, 251);
+}

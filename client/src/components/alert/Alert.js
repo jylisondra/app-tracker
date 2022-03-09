@@ -4,9 +4,13 @@ import styles from './Alert.module.css';
 
 export default function Alert() {
   const { alertType, alertText } = useAppContext();
-  return (
-    <div class={`${styles.alert} ${styles.alert_}${alertType} `}>
-      {alertText}
-    </div>
-  );
+  if (alertType === 'danger') {
+    return (
+      <div class={`${styles.alert} ${styles.alert_danger}`}>{alertText}</div>
+    );
+  } else {
+    return (
+      <div class={`${styles.alert} ${styles.alert_confirm}`}>{alertText}</div>
+    );
+  }
 }
