@@ -7,6 +7,10 @@ const register = async (req, res, next) => {
   if (!firstName || !email || !password) {
     throw new BadRequestError('please provide all values');
   }
+  const userExists = await User.findOne({ email });
+  if (userExists) {
+    throw new BadRequestError('Email is already registered');
+  }
   const user = await User.create({ firstName, email, password });
   res.status(StatusCodes.CREATED).json({ user });
 };
