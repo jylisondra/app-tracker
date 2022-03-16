@@ -12,7 +12,17 @@ const register = async (req, res, next) => {
     throw new BadRequestError('Email is already registered');
   }
   const user = await User.create({ firstName, email, password });
-  res.status(StatusCodes.CREATED).json({ user });
+  const token = user.createJWT();
+  res.status(StatusCodes.OK).json({
+    user: {
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      location: user.location,
+    },
+    token,
+    location: user.location,
+  });
 };
 const login = async (req, res) => {
   res.send('login user');
