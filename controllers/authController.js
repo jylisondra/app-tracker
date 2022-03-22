@@ -5,7 +5,7 @@ import BadRequestError from '../errors/BadRequest.js';
 const register = async (req, res, next) => {
   const { firstName, email, password } = req.body;
   if (!firstName || !email || !password) {
-    throw new BadRequestError('please provide all values');
+    throw new BadRequestError('please provide all values firstname');
   }
   const userExists = await User.findOne({ email });
   if (userExists) {
@@ -21,7 +21,6 @@ const register = async (req, res, next) => {
       location: user.location,
     },
     token,
-    location: user.location,
   });
 };
 const login = async (req, res) => {

@@ -1,20 +1,24 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './Register.module.css';
 import FormRow from '../../components/formRow/FormRow';
 import Alert from '../../components/alert/Alert';
 import { useAppContext } from '../../context/AppContext';
+import { useNavigate } from 'react-router-dom';
 
 const initialState = {
-  name: '',
+  firstName: '',
   email: '',
   password: '',
   isMember: true,
 };
 
 export default function Register() {
+  const navigate = useNavigate();
+  // local values
   const [values, setValues] = useState(initialState);
-  // global state
-  const { isLoading, showAlert, displayAlertDanger } = useAppContext();
+  // global values
+  const { user, isLoading, showAlert, displayAlertDanger, registerUser } =
+    useAppContext();
 
   const toggleStatus = () => {
     setValues({ ...values, isMember: !values.isMember });
@@ -26,12 +30,25 @@ export default function Register() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const { name, email, password, isMember } = values;
-    if (!email || !password || (!isMember && !name)) {
+    const { firstName, email, password, isMember } = values;
+    if (!email || !password || (!isMember && !firstName)) {
       displayAlertDanger();
       return;
     }
+    const currentUser = { firstName, email, password };
+    console.log('current user ', currentUser);
+    if (isMember) {
+      console.log('already member');
+    } else {
+      registerUser(currentUser);
+    }
   };
+
+  useEffect(() => {
+    if (user) {
+      navigate('/');
+    }
+  }, [user, navigate]);
 
   return (
     <form onSubmit={onSubmit} className={styles.form}>
@@ -41,13 +58,13 @@ export default function Register() {
         {showAlert && <Alert />}
         {!values.isMember && (
           <>
-            <label htmlFor="name" className={styles.form_label}>
+            <label htmlFor="firstName" className={styles.form_label}>
               Name
             </label>
             <input
               type="text"
-              name="name"
-              value={values.name}
+              name="firstName"
+              value={values.firstName}
               onChange={handleChange}
               className={styles.form_input}
             />
@@ -73,7 +90,13 @@ export default function Register() {
           onChange={handleChange}
           className={styles.form_input}
         />
-        <button className={`${styles.btn_submit} ${styles.btn}`}>Submit</button>
+        <button
+          className={`${styles.btn_submit} ${styles.btn}`}
+          disabled={isLoading}
+          onSubmit={onSubmit}
+        >
+          Submit
+        </button>
         {values.isMember ? (
           <p>
             Not signed up?

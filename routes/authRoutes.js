@@ -3,7 +3,7 @@ import express from 'express';
 
 const router = express.Router();
 
-router.route('/register');
+router.route('/register').post(register);
 //render register form
 
 router

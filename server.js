@@ -1,8 +1,9 @@
 import express from 'express';
 import dotenv from 'dotenv';
-dotenv.config();
 import 'express-async-errors';
+import morgan from 'morgan';
 
+dotenv.config();
 const app = express();
 
 // db and authUser
@@ -16,10 +17,18 @@ import jobsRouter from './routes/jobsRoutes.js';
 import notFoundMiddleware from './middleware/notFound.js';
 import errorHandler from './middleware/errorHandler.js';
 
+if (process.env.NODE_ENV !== 'production') {
+  app.use(morgan('dev'));
+}
+
 app.use(express.json()); // makes json data available to us in controllers
 
 app.get('/', (req, res) => {
-  res.send('hello!');
+  res.json({ msg: 'hello!' });
+});
+
+app.get('/api/v1', (req, res) => {
+  res.json({ msg: 'API' });
 });
 
 app.use('/api/v1/auth', authRouter);

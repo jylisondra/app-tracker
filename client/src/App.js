@@ -7,13 +7,14 @@ import './App.css';
 import Landing from './pages/landing/Landing';
 import Error from './pages/error/Error';
 import Register from './pages/register/Register';
+import Dashboard from './pages/dashboard/Dashboard';
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<div>Dashboard</div>}></Route>
+          <Route path="/" element={<Dashboard />}></Route>
           <Route path="/register" element={<Register />}></Route>
           <Route path="/landing" element={<Landing />}></Route>
           <Route path="*" element={<Error />}></Route>

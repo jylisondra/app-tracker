@@ -6,11 +6,15 @@ export default function Alert() {
   const { alertType, alertText } = useAppContext();
   if (alertType === 'danger') {
     return (
-      <div class={`${styles.alert} ${styles.alert_danger}`}>{alertText}</div>
+      <div className={`${styles.alert} ${styles.alert_danger}`}>
+        {alertText}
+      </div>
     );
   } else {
     return (
-      <div class={`${styles.alert} ${styles.alert_confirm}`}>{alertText}</div>
+      <div className={`${styles.alert} ${styles.alert_confirm}`}>
+        {alertText}
+      </div>
     );
   }
 }
