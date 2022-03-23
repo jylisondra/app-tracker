@@ -14,7 +14,7 @@ const register = async (req, res, next) => {
   }
   const user = await User.create({ firstName, email, password });
   const token = user.createJWT();
-  res.status(StatusCodes.OK).json({
+  res.status(StatusCodes.CREATED).json({
     user: {
       firstName: user.firstName,
       lastName: user.lastName,
@@ -29,15 +29,19 @@ const login = async (req, res) => {
   if (!email || !password) {
     throw new BadRequestError('Pleaes provide all values');
   }
+  // checks if user email is already registered
   const user = await User.findOne({ email }).select('+password');
   if (!user) {
     throw new UnauthorizedError('Invalid credentials');
   }
-  console.log(user);
+  // checks password match
   const isPasswordCorrect = await user.comparePassword(password);
   if (!isPasswordCorrect) {
     throw new UnauthorizedError('Invalid credentials');
   }
+  const token = user.createJWT();
+  user.password = undefined; // removes password from response
+  res.status(StatusCodes.OK).json({ user, token });
 };
 const updateUser = async (req, res) => {
   res.send('update user');

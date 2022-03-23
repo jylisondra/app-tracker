@@ -5,9 +5,9 @@ import {
   DISPLAY_ALERT_DANGER,
   DISPLAY_ALERT_CONFIRM,
   CLEAR_ALERT,
-  REGISTER_USER_BEGIN,
-  REGISTER_USER_SUCCESS,
-  REGISTER_USER_ERROR,
+  SETUP_USER_BEGIN,
+  SETUP_USER_SUCCESS,
+  SETUP_USER_ERROR,
 } from './actions';
 
 const token = localStorage.getItem('token');
@@ -53,38 +53,36 @@ const AppProvider = ({ children }) => {
     localStorage.removeItem('token');
   };
 
-  const registerUser = async (currentUser) => {
-    dispatch({ type: REGISTER_USER_BEGIN });
+  const setupUser = async (currentUser, endpoint) => {
+    dispatch({ type: SETUP_USER_BEGIN });
     try {
-      const res = await axios.post('/api/v1/auth/register', currentUser);
-      //console.log(res);
-      const { user, token, jobLocation } = res.data;
+      const res = await axios.post(`/api/v1/auth/${endpoint}`, currentUser);
+      const { user, token } = res.data;
       dispatch({
-        type: REGISTER_USER_SUCCESS,
+        type: SETUP_USER_SUCCESS,
         payload: {
           user,
           token,
-          jobLocation,
         },
       });
       addUserToLocalStorage({ user, token });
     } catch (error) {
-      //console.log(error.response);
       dispatch({
-        type: REGISTER_USER_ERROR,
-        payload: { msg: error.response.data.msg },
+        type: SETUP_USER_ERROR,
+        payload: {
+          msg: error.response.data.msg,
+        },
       });
     }
     clearAlert();
   };
-
   return (
     <AppContext.Provider
       value={{
         ...state,
         displayAlertDanger,
         displayAlertConfirm,
-        registerUser,
+        setupUser,
       }}
     >
       {children}

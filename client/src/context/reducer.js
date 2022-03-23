@@ -2,9 +2,9 @@ import {
   DISPLAY_ALERT_CONFIRM,
   DISPLAY_ALERT_DANGER,
   CLEAR_ALERT,
-  REGISTER_USER_BEGIN,
-  REGISTER_USER_SUCCESS,
-  REGISTER_USER_ERROR,
+  SETUP_USER_BEGIN,
+  SETUP_USER_SUCCESS,
+  SETUP_USER_ERROR,
 } from './actions';
 
 import { initialState } from './AppContext';
@@ -32,12 +32,12 @@ const reducer = (state, action) => {
         alertText: '',
         alertType: '',
       };
-    case REGISTER_USER_BEGIN:
+    case SETUP_USER_BEGIN:
       return {
         ...state,
         isLoading: true,
       };
-    case REGISTER_USER_SUCCESS:
+    case SETUP_USER_SUCCESS:
       return {
         ...state,
         isLoading: false,
@@ -46,9 +46,9 @@ const reducer = (state, action) => {
         jobLocation: action.payload.jobLocation,
         showAlert: true,
         alertType: 'success',
-        alertText: 'User successfully created! Redirecting...',
+        alertText: 'Success! Redirecting...',
       };
-    case REGISTER_USER_ERROR:
+    case SETUP_USER_ERROR:
       return {
         ...state,
         isLoading: false,
@@ -56,6 +56,7 @@ const reducer = (state, action) => {
         alertType: 'danger',
         alertText: action.payload.msg,
       };
+
     default:
       return state;
   }

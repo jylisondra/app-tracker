@@ -17,7 +17,7 @@ export default function Register() {
   // local values
   const [values, setValues] = useState(initialState);
   // global values
-  const { user, isLoading, showAlert, displayAlertDanger, registerUser } =
+  const { user, isLoading, showAlert, displayAlertDanger, setupUser } =
     useAppContext();
 
   const toggleStatus = () => {
@@ -36,11 +36,10 @@ export default function Register() {
       return;
     }
     const currentUser = { firstName, email, password };
-    console.log('current user ', currentUser);
     if (isMember) {
-      console.log('already member');
+      setupUser(currentUser, 'login');
     } else {
-      registerUser(currentUser);
+      setupUser(currentUser, 'register');
     }
   };
 

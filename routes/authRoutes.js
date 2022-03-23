@@ -4,17 +4,9 @@ import express from 'express';
 const router = express.Router();
 
 router.route('/register').post(register);
-//render register form
 
-router
-  .route('/login')
-  //render login form
+router.route('/login').post(login);
 
-  .post(login);
-router
-  .route('/updateUser')
-  //render update form
-
-  .patch(updateUser);
+router.route('/updateUser').patch(updateUser);
 
 export default router;
