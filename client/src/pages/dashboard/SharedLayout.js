@@ -1,15 +1,20 @@
 import { Link, Outlet } from 'react-router-dom';
+import Navbar from '../../components/navbar/Navbar';
+import SmallSideBar from '../../components/smallSideBar/SmallSideBar';
+import BigSideBar from '../../components/bigSideBar/BigSideBar';
 
 export default function SharedLayout() {
   return (
     <>
-      <nav>
-        <Link to="stats">Stats</Link>
-        <Link to="all-jobs">All Jobs</Link>
-        <Link to="add-job">Add Job</Link>
-        <Link to="profile">Profile</Link>
-      </nav>
-      <Outlet />
+      <main>
+        <BigSideBar />
+      </main>
+      <div>
+        <Navbar />
+        <div>
+          <Outlet />
+        </div>
+      </div>
     </>
   );
 }
