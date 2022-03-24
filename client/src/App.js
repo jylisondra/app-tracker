@@ -7,17 +7,34 @@ import './App.css';
 import Landing from './pages/landing/Landing';
 import Error from './pages/error/Error';
 import Register from './pages/register/Register';
-import Dashboard from './pages/dashboard/Dashboard';
+import AddJob from './pages/dashboard/AddJob';
+import AllJobs from './pages/dashboard/AllJobs';
+import Profile from './pages/dashboard/Profile';
+import Stats from './pages/dashboard/Stats';
+import SharedLayout from './pages/dashboard/SharedLayout';
+import ProtectedRoute from './pages/ProtectedRoute';
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Dashboard />}></Route>
-          <Route path="/register" element={<Register />}></Route>
-          <Route path="/landing" element={<Landing />}></Route>
-          <Route path="*" element={<Error />}></Route>
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <SharedLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route index element={<Stats />} />
+            <Route path="all-jobs" element={<AllJobs />} />
+            <Route path="add-job" element={<AddJob />} />
+            <Route path="profile" element={<Profile />} />
+          </Route>
+          <Route path="/register" element={<Register />} />
+          <Route path="/landing" element={<Landing />} />
+          <Route path="*" element={<Error />} />
         </Routes>
       </BrowserRouter>
     </div>
