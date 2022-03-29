@@ -8,6 +8,8 @@ import {
   SETUP_USER_BEGIN,
   SETUP_USER_SUCCESS,
   SETUP_USER_ERROR,
+  TOGGLE_SIDEBAR,
+  LOGOUT_USER,
 } from './actions';
 
 const token = localStorage.getItem('token');
@@ -43,6 +45,10 @@ const AppProvider = ({ children }) => {
     }, 3000);
   };
 
+  const toggleSidebar = () => {
+    dispatch({ type: TOGGLE_SIDEBAR });
+  };
+
   const addUserToLocalStorage = ({ user, token }) => {
     localStorage.setItem('user', JSON.stringify(user));
     localStorage.setItem('token', token);
@@ -76,6 +82,11 @@ const AppProvider = ({ children }) => {
     }
     clearAlert();
   };
+
+  const logoutUser = () => {
+    dispatch({ type: LOGOUT_USER });
+    removeUserFromLocalStorage();
+  };
   return (
     <AppContext.Provider
       value={{
@@ -83,6 +94,8 @@ const AppProvider = ({ children }) => {
         displayAlertDanger,
         displayAlertConfirm,
         setupUser,
+        toggleSidebar,
+        logoutUser,
       }}
     >
       {children}

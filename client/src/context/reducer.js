@@ -5,6 +5,8 @@ import {
   SETUP_USER_BEGIN,
   SETUP_USER_SUCCESS,
   SETUP_USER_ERROR,
+  TOGGLE_SIDEBAR,
+  LOGOUT_USER,
 } from './actions';
 
 import { initialState } from './AppContext';
@@ -56,7 +58,18 @@ const reducer = (state, action) => {
         alertType: 'danger',
         alertText: action.payload.msg,
       };
-
+    case TOGGLE_SIDEBAR:
+      console.log('toggle sidebar');
+      return {
+        ...state,
+        showSidebar: !state.showSidebar,
+      };
+    case LOGOUT_USER:
+      return {
+        ...initialState,
+        user: null,
+        token: null,
+      };
     default:
       return state;
   }
