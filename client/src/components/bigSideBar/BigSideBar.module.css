@@ -18,7 +18,8 @@
   font-weight: bold;
   display: flex;
   color: white;
-  padding: 0 0.6em;
+  display: flex;
+  justify-content: center;
 }
 
 .big_sidebar_header span {
