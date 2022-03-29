@@ -1,0 +1,31 @@
+.big_sidebar {
+  position: fixed;
+  height: 100vh;
+  width: 14em;
+  background: #19223b;
+  color: white;
+  margin-left: -14em;
+  transition: 0.2s ease;
+}
+
+.content {
+  position: sticky;
+  top: 0;
+}
+
+.big_sidebar_header {
+  font-size: 3em;
+  font-weight: bold;
+  display: flex;
+  color: white;
+  padding: 0 0.6em;
+}
+
+.big_sidebar_header span {
+  color: #9c7cf6;
+}
+
+.show_sidebar {
+  margin-left: 0em;
+  transition: 0.2s ease;
+}

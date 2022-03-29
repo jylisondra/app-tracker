@@ -8,17 +8,6 @@
   transition: 0.2s ease;
 }
 
-.nav_center {
-  font-size: 3em;
-  font-weight: bold;
-  display: flex;
-  color: white;
-}
-
-.nav_center span {
-  color: #9c7cf6;
-}
-
 .btn_toggle {
   color: white;
   font-size: 2rem;
