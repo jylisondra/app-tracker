@@ -59,7 +59,6 @@ const reducer = (state, action) => {
         alertText: action.payload.msg,
       };
     case TOGGLE_SIDEBAR:
-      console.log('toggle sidebar');
       return {
         ...state,
         showSidebar: !state.showSidebar,

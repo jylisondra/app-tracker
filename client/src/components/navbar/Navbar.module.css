@@ -1,13 +1,11 @@
 .navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
   height: 5rem;
   background: #19223b;
   display: flex;
   align-items: center;
-  margin: 0 auto;
+  position: sticky;
+  top: 0;
+  transition: 0.2s ease;
 }
 
 .nav_center {
@@ -15,7 +13,6 @@
   font-weight: bold;
   display: flex;
   color: white;
-  padding: 0 0.6em;
 }
 
 .nav_center span {
@@ -25,9 +22,14 @@
 .btn_toggle {
   color: white;
   font-size: 2rem;
-  margin-left: 1.5em;
   display: flex;
   align-items: center;
+  padding-left: 10px;
+}
+
+.active_sidebar {
+  margin-left: 14em;
+  transition: 0.2s ease;
 }
 
 .btn_container {

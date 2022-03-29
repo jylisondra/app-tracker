@@ -23,6 +23,7 @@ const initialState = {
   user: user ? JSON.parse(user) : null,
   token: token ? token : null,
   jobLocation: '',
+  showSidebar: false,
 };
 
 const AppContext = createContext();
