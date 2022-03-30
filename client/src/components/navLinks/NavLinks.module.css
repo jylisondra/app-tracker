@@ -1,0 +1,33 @@
+.navlinks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.navlink {
+  display: flex;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  padding: 0.5em;
+  font-size: 1.1rem;
+  margin: 0.4rem;
+  transition: 0.2s ease;
+  width: 80%;
+}
+
+.navlink:hover,
+.active {
+  background: #9c7cf6;
+  transition: 0.2s ease;
+  border-radius: 5px;
+}
+
+.link_container {
+  display: flex;
+  align-items: center;
+}
+
+.link_name {
+  margin-left: 0.9rem;
+}
