@@ -1,5 +1,6 @@
-import classnames from 'classnames';
+import NavLinks from '../navLinks/NavLinks';
 import { useAppContext } from '../../context/AppContext';
+import classnames from 'classnames';
 import styles from './BigSideBar.module.css';
 
 export default function BigSideBar() {
@@ -18,6 +19,7 @@ export default function BigSideBar() {
             <span>JOB</span>LY
           </p>
         </div>
+        <NavLinks />
       </div>
     </div>
   );
