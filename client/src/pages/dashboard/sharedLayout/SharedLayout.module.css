@@ -1,0 +1,9 @@
+.content_page {
+  margin: 1.5em;
+  transition: 0.2s ease;
+}
+
+.active_sidebar {
+  margin-left: 18em;
+  transition: 0.2s ease;
+}

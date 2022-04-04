@@ -1,11 +1,11 @@
 import styles from './FormRow.module.css';
 
 export default function FormRow({
+  labelName,
   type,
   value,
   name,
   handleChange,
-  labelName,
 }) {
   return (
     <div>

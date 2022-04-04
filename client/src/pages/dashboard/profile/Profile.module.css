@@ -1,0 +1,14 @@
+.title {
+  margin-bottom: 1em;
+}
+
+.form input {
+  width: 350px;
+}
+
+.btn_submit {
+  padding: 0.4em;
+  background: #9c7cf6;
+  border-radius: 5px;
+  color: white;
+}

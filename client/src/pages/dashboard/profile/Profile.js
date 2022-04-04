@@ -23,8 +23,8 @@ export default function Profile() {
     updateUser({ firstName, lastName, email });
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <h3>Profile</h3>
+    <form className={styles.form} onSubmit={handleSubmit}>
+      <h2 className={styles.title}>Profile</h2>
       {showAlert && <Alert />}
       <div className={styles.formCenter}>
         <FormRow

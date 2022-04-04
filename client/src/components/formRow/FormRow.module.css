@@ -9,7 +9,8 @@
 }
 
 .form_input {
-  width: 80%;
+  display: block;
+  font: inherit;
   height: 35px;
   margin-bottom: 20px;
 }
