@@ -8,6 +8,9 @@ import {
   SETUP_USER_BEGIN,
   SETUP_USER_SUCCESS,
   SETUP_USER_ERROR,
+  UPDATE_USER_BEGIN,
+  UPDATE_USER_SUCCESS,
+  UPDATE_USER_ERROR,
   TOGGLE_SIDEBAR,
   LOGOUT_USER,
 } from './actions';
@@ -23,13 +26,42 @@ const initialState = {
   user: user ? JSON.parse(user) : null,
   token: token ? token : null,
   jobLocation: '',
-  showSidebar: false,
+  showSidebar: true,
 };
 
 const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  const authFetch = axios.create({
+    baseURL: '/api/v1',
+  });
+
+  // request
+  authFetch.interceptors.request.use(
+    (config) => {
+      console.log(config);
+      config.headers.common['Authorization'] = `Bearer ${state.token}`;
+      return config;
+    },
+    (error) => {
+      return Promise.reject(error);
+    }
+  );
+
+  // response
+  authFetch.interceptors.response.use(
+    (response) => {
+      return response;
+    },
+    (error) => {
+      if (error.response.status === 401) {
+      }
+      console.log(error.response);
+      return Promise.reject(error);
+    }
+  );
 
   const displayAlertDanger = () => {
     dispatch({ type: DISPLAY_ALERT_DANGER });
@@ -84,6 +116,25 @@ const AppProvider = ({ children }) => {
     clearAlert();
   };
 
+  const updateUser = async (currentUser) => {
+    dispatch({ type: UPDATE_USER_BEGIN });
+    try {
+      const { data } = await authFetch.patch('/auth/updateUser', currentUser);
+      const { user, token } = data;
+      dispatch({
+        type: UPDATE_USER_SUCCESS,
+        payload: { user, token },
+      });
+      addUserToLocalStorage({ user, token });
+    } catch (error) {
+      dispatch({
+        type: UPDATE_USER_ERROR,
+        payload: { msg: error.response.data.msg },
+      });
+    }
+    clearAlert();
+  };
+
   const logoutUser = () => {
     dispatch({ type: LOGOUT_USER });
     removeUserFromLocalStorage();
@@ -97,6 +148,7 @@ const AppProvider = ({ children }) => {
         setupUser,
         toggleSidebar,
         logoutUser,
+        updateUser,
       }}
     >
       {children}

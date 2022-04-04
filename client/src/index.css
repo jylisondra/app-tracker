@@ -8,7 +8,7 @@
 
 :root {
   /* colors */
-  --bg-blue: #e4f6f7;
+  --bg-blue: #25304d;
   --nav-blue: #dae0f0;
   --card-bg: #ffffff;
   --pending-yellow: #f1cf76;
@@ -19,7 +19,7 @@
 
   /* fonts */
   --heading-font: 'Varela Round', Sans-Serif;
-  --font-color: #293241;
+  --font-color: #e3e5eb;
   --nav-height: 5rem;
 }
 
@@ -41,4 +41,14 @@ h2,
 h3,
 p {
   margin: 0;
+}
+
+button {
+  background: none;
+  border: none;
+  font: inherit;
+}
+
+button:hover {
+  cursor: pointer;
 }
