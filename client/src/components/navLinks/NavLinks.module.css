@@ -17,10 +17,16 @@
 }
 
 .navlink:hover,
-.active {
+.navlink.active:hover {
   background: #9c7cf6;
   transition: 0.2s ease;
   border-radius: 5px;
+  color: white;
+}
+
+.navlink.active {
+  color: #9c7cf6;
+  font-weight: bold;
 }
 
 .link_container {
