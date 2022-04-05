@@ -13,6 +13,10 @@ import {
   UPDATE_USER_ERROR,
   TOGGLE_SIDEBAR,
   LOGOUT_USER,
+  HANDLE_CHANGE,
+  CREATE_JOB_BEGIN,
+  CREATE_JOB_SUCCESS,
+  CREATE_JOB_ERROR,
 } from './actions';
 
 const token = localStorage.getItem('token');
@@ -31,7 +35,7 @@ const initialState = {
   company: '',
   location: '',
   dateApplied: '',
-  statusOptions: ['pending', 'rejected', 'interview'],
+  statusOptions: ['pending', 'interview', 'rejected'],
   status: 'pending',
   companyURL: '',
   listingURL: '',
@@ -102,6 +106,7 @@ const AppProvider = ({ children }) => {
     localStorage.removeItem('token');
   };
 
+  /* User Contexts */
   const setupUser = async (currentUser, endpoint) => {
     dispatch({ type: SETUP_USER_BEGIN });
     try {
@@ -151,6 +156,41 @@ const AppProvider = ({ children }) => {
     dispatch({ type: LOGOUT_USER });
     removeUserFromLocalStorage();
   };
+
+  const createJob = async () => {
+    dispatch({ type: CREATE_JOB_BEGIN });
+    try {
+      const {
+        company,
+        position,
+        location,
+        dateApplied,
+        status,
+        companyURL,
+        listingURL,
+      } = state;
+      await authFetch.post('/jobs', {
+        company,
+        position,
+        location,
+        dateApplied,
+        status,
+        companyURL,
+        listingURL,
+      });
+      dispatch({ type: CREATE_JOB_SUCCESS });
+      console.log('job created');
+    } catch (error) {
+      if (error.response.status === 401) return;
+      dispatch({
+        type: CREATE_JOB_ERROR,
+        payload: { msg: error.response.data.msg },
+      });
+    }
+  };
+  const handleChange = ({ name, value }) => {
+    dispatch({ type: HANDLE_CHANGE, payload: { name, value } });
+  };
   return (
     <AppContext.Provider
       value={{
@@ -161,6 +201,8 @@ const AppProvider = ({ children }) => {
         toggleSidebar,
         logoutUser,
         updateUser,
+        handleChange,
+        createJob,
       }}
     >
       {children}

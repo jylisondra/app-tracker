@@ -8,6 +8,10 @@ import {
   UPDATE_USER_BEGIN,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_ERROR,
+  HANDLE_CHANGE,
+  CREATE_JOB_BEGIN,
+  CREATE_JOB_SUCCESS,
+  CREATE_JOB_ERROR,
   TOGGLE_SIDEBAR,
   LOGOUT_USER,
 } from './actions';
@@ -96,6 +100,32 @@ const reducer = (state, action) => {
         ...initialState,
         user: null,
         token: null,
+      };
+    case HANDLE_CHANGE:
+      return {
+        ...state,
+        [action.payload.name]: action.payload.value,
+      };
+    case CREATE_JOB_BEGIN:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case CREATE_JOB_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        showAlert: true,
+        alertType: 'success',
+        alertText: 'Job Successfully Added',
+      };
+    case CREATE_JOB_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        showAlert: true,
+        alertType: 'danger',
+        alertText: action.payload.msg,
       };
     default:
       return state;
