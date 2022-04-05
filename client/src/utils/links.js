@@ -15,7 +15,7 @@ const links = [
   {
     id: 2,
     text: 'Jobs',
-    path: 'all-jobs',
+    path: 'jobs',
     icon: <RiProfileLine />,
   },
   {
