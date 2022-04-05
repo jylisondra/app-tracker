@@ -1,5 +1,26 @@
+import Job from '../models/job.js';
+import { StatusCodes } from 'http-status-codes';
+import BadRequestError from '../errors/BadRequest.js';
+import UnauthorizedError from '../errors/Unauthorized.js';
+
 const createJob = async (req, res) => {
-  res.send('create job');
+  const {
+    company,
+    position,
+    location,
+    dateApplied,
+    status,
+    isFavorite,
+    companyURL,
+    listingURL,
+  } = req.body;
+
+  if (!company || !position || !location) {
+    throw new BadRequestError('Missing fields');
+  }
+  req.body.createdBy = req.user.userId;
+  const job = await Job.create(req.body);
+  res.status(StatusCodes.CREATED).json({ job });
 };
 const deleteJob = async (req, res) => {
   res.send('cdelete job');

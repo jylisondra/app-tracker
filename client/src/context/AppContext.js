@@ -25,7 +25,17 @@ const initialState = {
   alertType: '',
   user: user ? JSON.parse(user) : null,
   token: token ? token : null,
-  jobLocation: '',
+  isEditing: false,
+  editJobId: '',
+  position: '',
+  company: '',
+  location: '',
+  dateApplied: '',
+  statusOptions: ['pending', 'rejected', 'interview'],
+  status: 'pending',
+  companyURL: '',
+  listingURL: '',
+  isFavorite: false,
   showSidebar: true,
 };
 
@@ -41,7 +51,6 @@ const AppProvider = ({ children }) => {
   // request
   authFetch.interceptors.request.use(
     (config) => {
-      console.log(config);
       config.headers.common['Authorization'] = `Bearer ${state.token}`;
       return config;
     },
@@ -56,9 +65,10 @@ const AppProvider = ({ children }) => {
       return response;
     },
     (error) => {
+      // Authorization error
       if (error.response.status === 401) {
+        logoutUser();
       }
-      console.log(error.response);
       return Promise.reject(error);
     }
   );
@@ -127,10 +137,12 @@ const AppProvider = ({ children }) => {
       });
       addUserToLocalStorage({ user, token });
     } catch (error) {
-      dispatch({
-        type: UPDATE_USER_ERROR,
-        payload: { msg: error.response.data.msg },
-      });
+      if (error.response.status !== 401) {
+        dispatch({
+          type: UPDATE_USER_ERROR,
+          payload: { msg: error.response.data.msg },
+        });
+      }
     }
     clearAlert();
   };

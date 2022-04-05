@@ -1,0 +1,9 @@
+.form_select {
+  display: block;
+  font: inherit;
+  height: 35px;
+}
+
+.form_select option {
+  text-transform: capitalize;
+}

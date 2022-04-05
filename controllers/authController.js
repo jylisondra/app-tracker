@@ -3,7 +3,7 @@ import { StatusCodes } from 'http-status-codes';
 import BadRequestError from '../errors/BadRequest.js';
 import UnauthorizedError from '../errors/Unauthorized.js';
 
-const register = async (req, res, next) => {
+const register = async (req, res) => {
   const { firstName, email, password } = req.body;
   if (!firstName || !email || !password) {
     throw new BadRequestError('please provide all values firstname');
