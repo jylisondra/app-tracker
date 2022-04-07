@@ -38,7 +38,7 @@ const initialState = {
   company: '',
   location: '',
   dateApplied: '',
-  statusOptions: ['pending', 'interview', 'rejected'],
+  statusOptions: ['pending', 'interviewing', 'rejected'],
   jobTypeOptions: ['full-time', 'part-time', 'contract', 'internship'],
   jobType: 'full-time',
   status: 'pending',

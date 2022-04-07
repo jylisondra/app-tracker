@@ -23,6 +23,7 @@ export default function AddJob() {
     displayAlertDanger,
     handleChange,
     createJob,
+    clearValues,
   } = useAppContext();
 
   const handleSubmit = (e) => {
@@ -32,6 +33,7 @@ export default function AddJob() {
       return;
     }
     createJob();
+    clearValues();
   };
 
   const handleJobInput = (e) => {
