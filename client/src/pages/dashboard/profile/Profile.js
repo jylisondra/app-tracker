@@ -2,7 +2,6 @@ import { useState } from 'react';
 import FormRow from '../../../components/formRow/FormRow';
 import Alert from '../../../components/alert/Alert';
 import { useAppContext } from '../../../context/AppContext';
-import { DISPLAY_ALERT_DANGER } from '../../../context/actions';
 
 import styles from './Profile.module.css';
 
