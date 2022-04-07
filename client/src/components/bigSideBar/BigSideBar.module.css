@@ -9,7 +9,6 @@
 }
 
 .content {
-  position: sticky;
   top: 0;
 }
 
@@ -30,4 +29,33 @@
 .show_sidebar {
   margin-left: 0em;
   transition: 0.2s ease;
+}
+
+.add_container {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 5rem;
+  left: 1.3rem;
+  background: #9c7cf6;
+  width: 80%;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  padding: 0.5em;
+  color: white;
+}
+
+.add_container span {
+  margin-left: 1.5rem;
+  text-decoration: none;
+  color: white;
+}
+
+.add_container:hover {
+  cursor: pointer;
+}
+
+.add_icon {
+  position: relative;
+  left: 0;
 }
