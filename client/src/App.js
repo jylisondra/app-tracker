@@ -8,7 +8,7 @@ import Landing from './pages/landing/Landing';
 import Error from './pages/error/Error';
 import Register from './pages/register/Register';
 import AddJob from './pages/dashboard//addJob/AddJob';
-import AllJobs from './pages/dashboard/AllJobs';
+import AllJobs from './pages/dashboard/allJobs/AllJobs';
 import Profile from './pages/dashboard/profile/Profile';
 import Stats from './pages/dashboard/Stats';
 import SharedLayout from './pages/dashboard/sharedLayout/SharedLayout';
@@ -29,7 +29,7 @@ function App() {
           >
             <Route index element={<Stats />} />
             <Route path="jobs" element={<AllJobs />} />
-            <Route path="add-job" element={<AddJob />} />
+            <Route path="jobs/create" element={<AddJob />} />
             <Route path="profile" element={<Profile />} />
           </Route>
           <Route path="/register" element={<Register />} />
