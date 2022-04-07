@@ -23,6 +23,11 @@ const JobSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  jobType: {
+    type: String,
+    enum: ['full-time', 'part-time', 'contract', 'internship'],
+    default: 'full-time',
+  },
   status: {
     type: String,
     enum: ['pending', 'interview', 'rejected'],
@@ -33,9 +38,6 @@ const JobSchema = new mongoose.Schema({
     default: false,
   },
   companyURL: {
-    type: String,
-  },
-  listingURL: {
     type: String,
   },
   createdBy: {

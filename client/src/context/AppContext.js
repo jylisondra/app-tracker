@@ -17,6 +17,8 @@ import {
   CREATE_JOB_BEGIN,
   CREATE_JOB_SUCCESS,
   CREATE_JOB_ERROR,
+  GET_JOBS_BEGIN,
+  GET_JOBS_SUCCESS,
 } from './actions';
 
 const token = localStorage.getItem('token');
@@ -36,10 +38,15 @@ const initialState = {
   location: '',
   dateApplied: '',
   statusOptions: ['pending', 'interview', 'rejected'],
+  jobTypeOptions: ['full-time', 'part-time', 'contract', 'internship'],
+  jobType: 'full-time',
   status: 'pending',
   companyURL: '',
-  listingURL: '',
   isFavorite: false,
+  jobs: [],
+  totalJobs: 0,
+  page: 1,
+  numPages: 1,
   showSidebar: true,
 };
 
@@ -166,8 +173,8 @@ const AppProvider = ({ children }) => {
         location,
         dateApplied,
         status,
+        jobType,
         companyURL,
-        listingURL,
       } = state;
       await authFetch.post('/jobs', {
         company,
@@ -175,11 +182,10 @@ const AppProvider = ({ children }) => {
         location,
         dateApplied,
         status,
+        jobType,
         companyURL,
-        listingURL,
       });
       dispatch({ type: CREATE_JOB_SUCCESS });
-      console.log('job created');
     } catch (error) {
       if (error.response.status === 401) return;
       dispatch({
@@ -188,8 +194,26 @@ const AppProvider = ({ children }) => {
       });
     }
   };
+
   const handleChange = ({ name, value }) => {
     dispatch({ type: HANDLE_CHANGE, payload: { name, value } });
+  };
+
+  const getJobs = async () => {
+    let url = `/jobs`;
+    dispatch({ type: GET_JOBS_BEGIN });
+    try {
+      const { data } = await authFetch(url);
+      console.log(data);
+      const { jobs, totalJobs, numPages } = data;
+      dispatch({
+        type: GET_JOBS_SUCCESS,
+        payload: { jobs, totalJobs, numPages },
+      });
+    } catch (error) {
+      console.log(error.response);
+      logoutUser();
+    }
   };
   return (
     <AppContext.Provider
@@ -203,6 +227,7 @@ const AppProvider = ({ children }) => {
         updateUser,
         handleChange,
         createJob,
+        getJobs,
       }}
     >
       {children}

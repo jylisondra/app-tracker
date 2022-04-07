@@ -15,11 +15,14 @@ export default function AddJob() {
     statusOptions,
     status,
     companyURL,
-    listingURL,
+    jobType,
+    jobTypeOptions,
     isFavorite,
     isEditing,
     showAlert,
     displayAlertDanger,
+    handleChange,
+    createJob,
   } = useAppContext();
 
   const handleSubmit = (e) => {
@@ -28,12 +31,11 @@ export default function AddJob() {
       displayAlertDanger();
       return;
     }
+    createJob();
   };
 
   const handleJobInput = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    console.log(`${name}: ${value}`);
+    handleChange({ name: e.target.name, value: e.target.value });
   };
 
   return (
@@ -56,6 +58,13 @@ export default function AddJob() {
           handleChange={handleJobInput}
         />
         <FormRow
+          labelName="Location"
+          type="text"
+          name="location"
+          value={location}
+          handleChange={handleJobInput}
+        />
+        <FormRow
           labelName="Date Applied"
           type="date"
           name="dateApplied"
@@ -69,6 +78,13 @@ export default function AddJob() {
           list={statusOptions}
           handleChange={handleJobInput}
         />
+        <FormRowSelect
+          labelName="Job Type"
+          name="jobType"
+          value={jobType}
+          list={jobTypeOptions}
+          handleChange={handleJobInput}
+        />
         <FormRow
           labelName="Company URL"
           type="text"
@@ -76,17 +92,10 @@ export default function AddJob() {
           value={companyURL}
           handleChange={handleJobInput}
         />
-        <FormRow
-          labelName="Listing URL"
-          type="text"
-          name="listingURL"
-          value={listingURL}
-          handleChange={handleJobInput}
-        />
         <button className={styles.btn_submit} type="submit">
           Submit
         </button>
-        <Link to="/all-jobs">Cancel</Link>
+        <Link to="/jobs">Cancel</Link>
       </div>
     </form>
   );
