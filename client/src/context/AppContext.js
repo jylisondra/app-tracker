@@ -17,6 +17,7 @@ import {
   CREATE_JOB_BEGIN,
   CREATE_JOB_SUCCESS,
   CREATE_JOB_ERROR,
+  CLEAR_VALUES,
   GET_JOBS_BEGIN,
   GET_JOBS_SUCCESS,
 } from './actions';
@@ -164,6 +165,7 @@ const AppProvider = ({ children }) => {
     removeUserFromLocalStorage();
   };
 
+  /* Job Contexts */
   const createJob = async () => {
     dispatch({ type: CREATE_JOB_BEGIN });
     try {
@@ -195,10 +197,6 @@ const AppProvider = ({ children }) => {
     }
   };
 
-  const handleChange = ({ name, value }) => {
-    dispatch({ type: HANDLE_CHANGE, payload: { name, value } });
-  };
-
   const getJobs = async () => {
     let url = `/jobs`;
     dispatch({ type: GET_JOBS_BEGIN });
@@ -215,6 +213,15 @@ const AppProvider = ({ children }) => {
       logoutUser();
     }
   };
+
+  const clearValues = () => {
+    dispatch({ type: CLEAR_VALUES });
+  };
+
+  const handleChange = ({ name, value }) => {
+    dispatch({ type: HANDLE_CHANGE, payload: { name, value } });
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -227,6 +234,7 @@ const AppProvider = ({ children }) => {
         updateUser,
         handleChange,
         createJob,
+        clearValues,
         getJobs,
       }}
     >

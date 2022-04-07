@@ -12,6 +12,7 @@ import {
   CREATE_JOB_BEGIN,
   CREATE_JOB_SUCCESS,
   CREATE_JOB_ERROR,
+  CLEAR_VALUES,
   GET_JOBS_BEGIN,
   GET_JOBS_SUCCESS,
   TOGGLE_SIDEBAR,
@@ -142,6 +143,19 @@ const reducer = (state, action) => {
         totalJobs: action.payload.totalJobs,
         numPages: action.payload.numPages,
       };
+    case CLEAR_VALUES:
+      const initialState = {
+        isEditing: false,
+        editJobId: '',
+        company: '',
+        position: '',
+        location: '',
+        dateApplied: '',
+        jobType: 'full-time',
+        status: 'pending',
+        companyURL: '',
+      };
+      return { ...state, ...initialState };
     default:
       return state;
   }
