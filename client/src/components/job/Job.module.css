@@ -113,6 +113,7 @@ hr {
   font-weight: bold;
   position: absolute;
   bottom: 0;
+  display: flex;
 }
 
 .btn {
@@ -143,6 +144,19 @@ hr {
   background: rgba(223, 107, 107, 0.89);
   color: white;
   transition: 0.2s ease;
+}
+
+.btn_confirm {
+  background: rgba(223, 107, 107, 0.89);
+  color: white;
+  padding: 0.42rem 0.7rem;
+}
+
+.btn_cancel {
+  border: 2px solid rgba(223, 107, 107, 0.89);
+  color: rgba(223, 107, 107, 0.89);
+  padding: 0.3rem 0.6rem;
+  margin-left: 0.5rem;
 }
 
 @media screen and (max-width: 760px) {

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../../context/AppContext';
 import classnames from 'classnames';
@@ -24,6 +24,7 @@ export default function Job({
   isFavorite,
 }) {
   const { setEditJob, deleteJob, toggleFavorite } = useAppContext();
+  const [confirmDelete, setConfirmDelete] = useState(false);
   let date = moment(dateApplied);
   date = date.format('MMM Do, YYYY');
 
@@ -36,9 +37,14 @@ export default function Job({
     window.open(url);
   };
 
+  const toggleConfirm = () => {
+    setConfirmDelete((prev) => !prev);
+  };
+
   const handleToggleFavorite = (e) => {
     console.log(e.target);
   };
+
   return (
     <div className={styles.card}>
       <div
@@ -95,12 +101,29 @@ export default function Job({
         >
           Edit
         </Link>
-        <button
-          className={`${styles.btn} ${styles.btn_delete}`}
-          onClick={() => deleteJob(_id)}
-        >
-          Delete
-        </button>
+        {!confirmDelete ? (
+          <button
+            className={`${styles.btn} ${styles.btn_delete}`}
+            onClick={toggleConfirm}
+          >
+            Delete
+          </button>
+        ) : (
+          <div className={styles.confirm_container}>
+            <button
+              className={`${styles.btn} ${styles.btn_confirm}`}
+              onClick={() => deleteJob(_id)}
+            >
+              Confirm
+            </button>
+            <button
+              className={`${styles.btn} ${styles.btn_cancel}`}
+              onClick={toggleConfirm}
+            >
+              Cancel
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
