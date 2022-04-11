@@ -17,6 +17,12 @@ import {
   CREATE_JOB_BEGIN,
   CREATE_JOB_SUCCESS,
   CREATE_JOB_ERROR,
+  SET_EDIT_JOB,
+  EDIT_JOB_BEGIN,
+  EDIT_JOB_SUCCESS,
+  EDIT_JOB_ERROR,
+  DELETE_JOB_BEGIN,
+  TOGGLE_FAVORITE,
   CLEAR_VALUES,
   GET_JOBS_BEGIN,
   GET_JOBS_SUCCESS,
@@ -195,6 +201,52 @@ const AppProvider = ({ children }) => {
         payload: { msg: error.response.data.msg },
       });
     }
+    clearAlert();
+  };
+
+  const setEditJob = (id) => {
+    dispatch({ type: SET_EDIT_JOB, payload: { id } });
+  };
+
+  const editJob = async () => {
+    dispatch({ type: EDIT_JOB_BEGIN });
+    try {
+      const {
+        company,
+        position,
+        location,
+        dateApplied,
+        status,
+        jobType,
+        companyURL,
+      } = state;
+      await authFetch.patch(`/jobs/${state.editJobId}`, {
+        company,
+        position,
+        location,
+        dateApplied,
+        status,
+        jobType,
+        companyURL,
+      });
+      dispatch({ type: EDIT_JOB_SUCCESS });
+    } catch (error) {
+      dispatch({
+        type: EDIT_JOB_ERROR,
+        payload: { msg: error.response.data.msg },
+      });
+    }
+  };
+
+  const deleteJob = async (id) => {
+    dispatch({ type: DELETE_JOB_BEGIN });
+    try {
+      await authFetch.delete(`/jobs/${id}`);
+      getJobs();
+    } catch (error) {
+      logoutUser();
+    }
+    console.log(`delete ${id}`);
   };
 
   const getJobs = async () => {
@@ -209,11 +261,13 @@ const AppProvider = ({ children }) => {
         payload: { jobs, totalJobs, numPages },
       });
     } catch (error) {
-      console.log(error.response);
       logoutUser();
     }
   };
 
+  const toggleFavorite = (currentJob) => {
+    dispatch({ type: TOGGLE_FAVORITE });
+  };
   const clearValues = () => {
     dispatch({ type: CLEAR_VALUES });
   };
@@ -234,8 +288,12 @@ const AppProvider = ({ children }) => {
         updateUser,
         handleChange,
         createJob,
+        setEditJob,
+        editJob,
+        deleteJob,
         clearValues,
         getJobs,
+        toggleFavorite,
       }}
     >
       {children}

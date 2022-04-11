@@ -19,6 +19,7 @@ export default function AddJob() {
     jobTypeOptions,
     isFavorite,
     isEditing,
+    editJob,
     showAlert,
     displayAlertDanger,
     handleChange,
@@ -32,7 +33,12 @@ export default function AddJob() {
       displayAlertDanger();
       return;
     }
-    createJob();
+    if (isEditing) {
+      console.log('edit');
+      editJob();
+    } else {
+      createJob();
+    }
     clearValues();
   };
 

@@ -13,9 +13,15 @@ import {
   CREATE_JOB_SUCCESS,
   CREATE_JOB_ERROR,
   CLEAR_VALUES,
+  SET_EDIT_JOB,
+  EDIT_JOB_BEGIN,
+  EDIT_JOB_SUCCESS,
+  EDIT_JOB_ERROR,
+  DELETE_JOB_BEGIN,
   GET_JOBS_BEGIN,
   GET_JOBS_SUCCESS,
   TOGGLE_SIDEBAR,
+  TOGGLE_FAVORITE,
   LOGOUT_USER,
 } from './actions';
 
@@ -142,6 +148,61 @@ const reducer = (state, action) => {
         jobs: action.payload.jobs,
         totalJobs: action.payload.totalJobs,
         numPages: action.payload.numPages,
+      };
+    case DELETE_JOB_BEGIN:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case SET_EDIT_JOB:
+      const job = state.jobs.find((job) => job._id === action.payload.id);
+      const {
+        _id,
+        company,
+        position,
+        location,
+        dateApplied,
+        jobType,
+        status,
+        companyURL,
+      } = job;
+      return {
+        ...state,
+        isEditing: true,
+        editJobId: _id,
+        company,
+        position,
+        location,
+        dateApplied,
+        jobType,
+        status,
+        companyURL,
+      };
+    case EDIT_JOB_BEGIN:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case EDIT_JOB_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        showAlert: true,
+        alertType: 'success',
+        alertText: 'Job Successfully Updated',
+      };
+    case EDIT_JOB_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        showAlert: true,
+        alertType: 'danger',
+        alertText: action.payload.msg,
+      };
+    case TOGGLE_FAVORITE:
+      return {
+        ...state,
+        isFavorite: !state.isFavorite,
       };
     case CLEAR_VALUES:
       const initialState = {

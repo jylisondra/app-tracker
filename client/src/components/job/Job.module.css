@@ -3,11 +3,10 @@
   border-radius: 5px;
   margin: 1rem;
   position: relative;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
-    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
-.banner {
+/* .banner {
   position: relative;
   top: 0;
   width: 100%;
@@ -18,20 +17,49 @@
   text-transform: uppercase;
   color: rgba(33, 33, 46, 0.897);
   font-weight: bold;
+} */
+
+.banner {
+  width: 142px;
+  position: absolute;
+  right: 0rem;
+  top: 1.1rem;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  padding: 0.2rem;
 }
 
 .banner_interview {
-  background: rgb(149, 223, 223);
+  background: rgb(125, 213, 240);
+  color: rgb(18, 18, 54);
 }
 .banner_pending {
-  background: rgb(252, 231, 114);
+  background: rgb(240, 203, 104);
+  color: rgb(90, 68, 6);
 }
 .banner_rejected {
-  background: rgb(226, 68, 68);
+  background: rgb(230, 66, 66);
+  color: rgb(100, 10, 10);
 }
 
 .title {
   margin: 0.8rem;
+}
+
+.favorite {
+  position: absolute;
+  right: 1rem;
+  top: 2rem;
+  font-size: 2rem;
+  color: white;
+}
+.favorite:hover {
+  color: pink;
 }
 
 .logo {
@@ -61,6 +89,7 @@ hr {
 .description_container {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  margin-bottom: 3.5rem;
 }
 
 .description {
@@ -78,28 +107,51 @@ hr {
 .description button {
   color: inherit;
 }
+
 .btn_container {
   margin: 0.8rem;
   font-weight: bold;
-  letter-spacing: 1px;
-  position: relative;
+  position: absolute;
   bottom: 0;
 }
 
+.btn {
+  letter-spacing: 1.5px;
+  transition: 0.2s ease;
+  text-decoration: none;
+  border-radius: 5px;
+}
 .btn_edit {
-  background: rgb(169, 199, 169);
-  color: rgb(4, 63, 4);
+  background: rgb(177, 212, 137);
+  color: rgb(19, 66, 10);
   margin-right: 0.5rem;
-  padding: 0.3rem 0.6rem;
+  padding: 0.42rem 0.7rem;
+}
+
+.btn_edit:hover {
+  background: rgb(208, 235, 178);
+  color: rgb(19, 66, 10);
 }
 
 .btn_delete {
-  background: rgb(185, 88, 88);
-  color: rgb(77, 14, 14);
+  border: 2px solid rgba(223, 107, 107, 0.89);
+  color: rgba(223, 107, 107, 0.89);
   padding: 0.3rem 0.6rem;
 }
 
+.btn_delete:hover {
+  background: rgba(223, 107, 107, 0.89);
+  color: white;
+  transition: 0.2s ease;
+}
+
 @media screen and (max-width: 760px) {
+  .description_container {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}
+@media screen and (min-width: 1020px) and (max-width: 1060px) {
   .description_container {
     display: grid;
     grid-template-columns: 1fr;

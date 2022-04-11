@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useAppContext } from '../../context/AppContext';
 import classnames from 'classnames';
 import moment from 'moment';
@@ -8,9 +9,11 @@ import {
   FaExternalLinkAlt,
   FaBriefcase,
 } from 'react-icons/fa';
+import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import styles from './Job.module.css';
 
 export default function Job({
+  _id,
   company,
   position,
   location,
@@ -18,7 +21,9 @@ export default function Job({
   status,
   companyURL,
   jobType,
+  isFavorite,
 }) {
+  const { setEditJob, deleteJob, toggleFavorite } = useAppContext();
   let date = moment(dateApplied);
   date = date.format('MMM Do, YYYY');
 
@@ -29,6 +34,10 @@ export default function Job({
       url = 'http://' + url;
     }
     window.open(url);
+  };
+
+  const handleToggleFavorite = (e) => {
+    console.log(e.target);
   };
   return (
     <div className={styles.card}>
@@ -48,6 +57,9 @@ export default function Job({
         {/*<div className={styles.logo}>{company.charAt(0)}</div>}*/}
         <h2 className={styles.company}>{company}</h2>
         <p className={styles.position}>{position}</p>
+        {/*<button onClick={handleToggleFavorite} className={styles.favorite}>
+          {isFavorite ? <AiFillStar /> : <AiOutlineStar />}
+        </button>*/}
       </div>
       <hr />
       <div className={styles.description_container}>
@@ -71,8 +83,24 @@ export default function Job({
         )}
       </div>
       <div className={styles.btn_container}>
-        <button className={styles.btn_edit}>Edit</button>
-        <button className={styles.btn_delete}>Delete</button>
+        <Link
+          to={{
+            pathname: '/jobs/create',
+            state: {
+              isEditing: true,
+            },
+          }}
+          onClick={() => setEditJob(_id)}
+          className={`${styles.btn} ${styles.btn_edit}`}
+        >
+          Edit
+        </Link>
+        <button
+          className={`${styles.btn} ${styles.btn_delete}`}
+          onClick={() => deleteJob(_id)}
+        >
+          Delete
+        </button>
       </div>
     </div>
   );
