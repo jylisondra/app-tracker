@@ -1,3 +1,4 @@
+import classnames from 'classnames';
 import styles from './FormRow.module.css';
 
 export default function FormRow({
@@ -6,10 +7,17 @@ export default function FormRow({
   value,
   name,
   handleChange,
+  className,
 }) {
   return (
     <div>
-      <label htmlFor={name} className={`${styles.form_label}`}>
+      <label
+        htmlFor={name}
+        className={classnames(
+          styles.form_label,
+          className === 'add_job' ? styles.addJob : ''
+        )}
+      >
         {labelName || name}
       </label>
       <input

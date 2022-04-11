@@ -2,8 +2,8 @@
   display: block;
   font: inherit;
   height: 35px;
-}
-
-.form_select option {
   text-transform: capitalize;
+  cursor: pointer;
+  margin-top: 10px;
+  width: 100%;
 }

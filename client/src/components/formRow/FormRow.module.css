@@ -13,4 +13,8 @@
   font: inherit;
   height: 35px;
   margin-bottom: 20px;
+  width: 100%;
+}
+
+.add_job {
 }

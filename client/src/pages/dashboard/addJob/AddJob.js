@@ -47,64 +47,70 @@ export default function AddJob() {
   };
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
+    <>
       <h2 className={styles.title}>{isEditing ? 'Edit Job' : 'Add Job'}</h2>
-      {showAlert && <Alert />}
-      <div className={styles.form_center}>
-        <FormRow
-          labelName="Company"
-          type="text"
-          name="company"
-          value={company}
-          handleChange={handleJobInput}
-        />
-        <FormRow
-          labelName="Position"
-          type="text"
-          name="position"
-          value={position}
-          handleChange={handleJobInput}
-        />
-        <FormRow
-          labelName="Location"
-          type="text"
-          name="location"
-          value={location}
-          handleChange={handleJobInput}
-        />
-        <FormRow
-          labelName="Date Applied"
-          type="date"
-          name="dateApplied"
-          value={dateApplied}
-          handleChange={handleJobInput}
-        />
-        <FormRowSelect
-          labelName="Status"
-          name="status"
-          value={status}
-          list={statusOptions}
-          handleChange={handleJobInput}
-        />
-        <FormRowSelect
-          labelName="Job Type"
-          name="jobType"
-          value={jobType}
-          list={jobTypeOptions}
-          handleChange={handleJobInput}
-        />
-        <FormRow
-          labelName="Company URL"
-          type="text"
-          name="companyURL"
-          value={companyURL}
-          handleChange={handleJobInput}
-        />
-        <button className={styles.btn_submit} type="submit">
+      <form className={styles.form} onSubmit={handleSubmit}>
+        {showAlert && <Alert />}
+        <div className={styles.form_center}>
+          <FormRow
+            labelName="Company"
+            type="text"
+            name="company"
+            value={company}
+            handleChange={handleJobInput}
+          />
+          <FormRow
+            labelName="Position"
+            type="text"
+            name="position"
+            value={position}
+            handleChange={handleJobInput}
+          />
+          <FormRow
+            labelName="Location"
+            type="text"
+            name="location"
+            value={location}
+            handleChange={handleJobInput}
+          />
+          <FormRow
+            labelName="Date Applied"
+            type="date"
+            name="dateApplied"
+            value={dateApplied}
+            handleChange={handleJobInput}
+          />
+          <FormRowSelect
+            labelName="Status"
+            name="status"
+            value={status}
+            list={statusOptions}
+            className="add_job"
+            handleChange={handleJobInput}
+          />
+          <FormRowSelect
+            labelName="Job Type"
+            name="jobType"
+            value={jobType}
+            list={jobTypeOptions}
+            className="add_job"
+            handleChange={handleJobInput}
+          />
+          <FormRow
+            labelName="Company URL - Optional"
+            type="text"
+            name="companyURL"
+            value={companyURL}
+            handleChange={handleJobInput}
+          />
+        </div>
+        <button className={`${styles.btn} ${styles.btn_submit}`} type="submit">
           Submit
         </button>
-        <Link to="/jobs">Cancel</Link>
-      </div>
-    </form>
+        <Link className={`${styles.btn} ${styles.link}`} to="/jobs">
+          Cancel
+        </Link>
+      </form>
+    </>
   );
 }

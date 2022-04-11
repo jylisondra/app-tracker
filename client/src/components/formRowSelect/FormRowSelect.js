@@ -1,3 +1,4 @@
+import classnames from 'classnames';
 import styles from './FormRowSelect.module.css';
 
 export default function FormRowSelect({
@@ -6,6 +7,7 @@ export default function FormRowSelect({
   value,
   handleChange,
   list,
+  className,
 }) {
   return (
     <div>
@@ -16,7 +18,10 @@ export default function FormRowSelect({
         name={name}
         value={value}
         onChange={handleChange}
-        className={styles.form_select}
+        className={classnames(
+          styles.form_select,
+          className === 'add_job' ? styles.add_job : ''
+        )}
       >
         {list.map((item, index) => {
           return (

@@ -1,0 +1,43 @@
+.form {
+  background: var(--dark-bg);
+  border-radius: 5px;
+  padding: 1.5rem 2rem;
+  margin-top: 1rem;
+}
+
+.form_center {
+  column-gap: 4rem;
+}
+
+.btn {
+  padding: 0.4em;
+  border-radius: 5px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+.btn_submit {
+  padding: 0.4em;
+  background: #9c7cf6;
+  border-radius: 5px;
+  color: white;
+}
+
+.link {
+  margin-left: 1rem;
+  text-decoration: none;
+  color: #9c7cf6;
+  border: 2px solid #9c7cf6;
+}
+
+@media screen and (min-width: 760px) {
+  .form_center {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .form_center {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
