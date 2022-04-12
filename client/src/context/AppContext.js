@@ -23,6 +23,8 @@ import {
   EDIT_JOB_ERROR,
   DELETE_JOB_BEGIN,
   TOGGLE_FAVORITE,
+  SHOW_STATS_BEGIN,
+  SHOW_STATS_SUCCESS,
   CLEAR_VALUES,
   GET_JOBS_BEGIN,
   GET_JOBS_SUCCESS,
@@ -54,6 +56,8 @@ const initialState = {
   totalJobs: 0,
   page: 1,
   numPages: 1,
+  stats: {},
+  monthlyApps: [],
   showSidebar: true,
 };
 
@@ -236,6 +240,7 @@ const AppProvider = ({ children }) => {
         payload: { msg: error.response.data.msg },
       });
     }
+    clearAlert();
   };
 
   const deleteJob = async (id) => {
@@ -276,6 +281,21 @@ const AppProvider = ({ children }) => {
     dispatch({ type: HANDLE_CHANGE, payload: { name, value } });
   };
 
+  /* Stats contexts */
+  const showStats = async () => {
+    dispatch({ type: SHOW_STATS_BEGIN });
+    try {
+      const { data } = await authFetch('/jobs/stats');
+      dispatch({
+        type: SHOW_STATS_SUCCESS,
+        payload: {
+          stats: data.defaultStats,
+          monthlyApps: data.monthlyApps,
+        },
+      });
+    } catch (error) {}
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -294,6 +314,7 @@ const AppProvider = ({ children }) => {
         clearValues,
         getJobs,
         toggleFavorite,
+        showStats,
       }}
     >
       {children}

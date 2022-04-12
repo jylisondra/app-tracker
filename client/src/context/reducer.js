@@ -22,6 +22,8 @@ import {
   GET_JOBS_SUCCESS,
   TOGGLE_SIDEBAR,
   TOGGLE_FAVORITE,
+  SHOW_STATS_BEGIN,
+  SHOW_STATS_SUCCESS,
   LOGOUT_USER,
 } from './actions';
 
@@ -215,6 +217,19 @@ const reducer = (state, action) => {
         jobType: 'full-time',
         status: 'pending',
         companyURL: '',
+      };
+    case SHOW_STATS_BEGIN:
+      return {
+        ...state,
+        isLoading: true,
+        showAlert: false,
+      };
+    case SHOW_STATS_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        stats: action.payload.stats,
+        monthlyApps: action.payload.monthlyApps,
       };
       return { ...state, ...initialState };
     default:

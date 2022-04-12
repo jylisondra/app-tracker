@@ -4,6 +4,7 @@ import BadRequestError from '../errors/BadRequest.js';
 import UnauthorizedError from '../errors/Unauthorized.js';
 import NotFoundError from '../errors/NotFound.js';
 import checkPermissions from '../utils/checkPermissions.js';
+import mongoose from 'mongoose';
 
 const createJob = async (req, res) => {
   const { company, position, location } = req.body;
@@ -53,15 +54,24 @@ const updateJob = async (req, res) => {
 };
 
 const showStats = async (req, res) => {
-  res.send('show stats');
-};
+  let stats = await Job.aggregate([
+    { $match: { createdBy: mongoose.Types.ObjectId(req.user.userId) } },
+    { $group: { _id: '$status', count: { $sum: 1 } } },
+  ]);
+  //turn stats array into object
+  stats = stats.reduce((acc, curr) => {
+    const { _id: title, count } = curr;
+    acc[title] = count;
+    return acc;
+  }, {});
 
-const findJob = async (jobId) => {
-  const job = await Job.findOne({ _id: jobId });
-  if (!job) {
-    throw new NotFoundError(`No job with id ${jobId}`);
-  }
-  return job;
+  const defaultStats = {
+    pending: stats.pending || 0,
+    interviewing: stats.interviewing || 0,
+    declined: stats.declined || 0,
+  };
+  let monthlyApps = [];
+  res.status(StatusCodes.OK).json({ defaultStats, monthlyApps });
 };
 
 export { createJob, deleteJob, getAllJobs, updateJob, showStats };
