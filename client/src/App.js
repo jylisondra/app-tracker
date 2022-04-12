@@ -10,7 +10,7 @@ import Register from './pages/register/Register';
 import AddJob from './pages/dashboard//addJob/AddJob';
 import AllJobs from './pages/dashboard/allJobs/AllJobs';
 import Profile from './pages/dashboard/profile/Profile';
-import Stats from './pages/dashboard/Stats';
+import Stats from './pages/dashboard/stats/Stats';
 import SharedLayout from './pages/dashboard/sharedLayout/SharedLayout';
 import ProtectedRoute from './pages/ProtectedRoute';
 
