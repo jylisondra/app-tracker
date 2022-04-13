@@ -5,6 +5,7 @@ import UnauthorizedError from '../errors/Unauthorized.js';
 import NotFoundError from '../errors/NotFound.js';
 import checkPermissions from '../utils/checkPermissions.js';
 import mongoose from 'mongoose';
+import moment from 'moment';
 
 const createJob = async (req, res) => {
   const { company, position, location } = req.body;
@@ -68,9 +69,42 @@ const showStats = async (req, res) => {
   const defaultStats = {
     pending: stats.pending || 0,
     interviewing: stats.interviewing || 0,
-    declined: stats.declined || 0,
+    rejected: stats.rejected || 0,
   };
-  let monthlyApps = [];
+  let monthlyApps = await Job.aggregate([
+    { $match: { createdBy: mongoose.Types.ObjectId(req.user.userId) } },
+    {
+      $group: {
+        _id: {
+          year: { $year: '$dateApplied' },
+          month: { $month: '$dateApplied' },
+        },
+        count: { $sum: 1 },
+      },
+    },
+    {
+      $sort: {
+        '_id.year': -1,
+        '_id.month': -1,
+      },
+    },
+    {
+      $limit: 5,
+    },
+  ]);
+  monthlyApps = monthlyApps
+    .map((item) => {
+      const {
+        _id: { year, month },
+        count,
+      } = item;
+      const date = moment()
+        .month(month - 1)
+        .year(year)
+        .format('MMM Y');
+      return { date, count };
+    })
+    .reverse();
   res.status(StatusCodes.OK).json({ defaultStats, monthlyApps });
 };
 
