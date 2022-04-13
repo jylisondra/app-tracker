@@ -1,5 +1,6 @@
 import { useAppContext } from '../../context/AppContext';
 import StatItem from '../statItem/StatItem';
+import { FaFlag, FaBusinessTime, FaTimes } from 'react-icons/fa';
 import styles from './StatsContainer.module.css';
 
 export default function StatsContainer() {
@@ -8,14 +9,17 @@ export default function StatsContainer() {
     {
       title: 'pending applications',
       count: stats.pending || 0,
+      icon: <FaFlag />,
     },
     {
-      title: 'interviewing',
+      title: 'companies interviewing',
       count: stats.interviewing || 0,
+      icon: <FaBusinessTime />,
     },
     {
       title: 'jobs declined',
       count: stats.rejected || 0,
+      icon: <FaTimes />,
     },
   ];
   return (
