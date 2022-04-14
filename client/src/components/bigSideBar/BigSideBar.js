@@ -7,7 +7,7 @@ import styles from './BigSideBar.module.css';
 import { HiPlus } from 'react-icons/hi';
 
 export default function BigSideBar() {
-  const { showSidebar, toggleSidebar } = useAppContext();
+  const { showSidebar, toggleSidebar, clearValues } = useAppContext();
   const [showAddToggle, setAddToggle] = useState(false);
 
   return (
@@ -18,11 +18,6 @@ export default function BigSideBar() {
       )}
     >
       <div className={styles.content}>
-        <div className={styles.big_sidebar_header}>
-          <p>
-            <span>JOB</span>LY
-          </p>
-        </div>
         <NavLinks />
         <Link className={styles.add_link} to="/jobs/create">
           <div className={styles.add_container}>

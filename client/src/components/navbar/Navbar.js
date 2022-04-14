@@ -16,11 +16,15 @@ export default function Navbar() {
         showSidebar ? styles.active_sidebar : ''
       )}
     >
-      <div className={styles.nav_center}>
+      <div className={styles.nav_left}>
         <button className={styles.btn_toggle} onClick={toggleSidebar}>
           <FaBars />
         </button>
+        <p className={styles.logo}>
+          <span>JOB</span>LY
+        </p>
       </div>
+      <div className={styles.nav_center}></div>
 
       <div className={styles.btn_container}>
         <button onClick={() => setShowLogout(!showLogout)}>

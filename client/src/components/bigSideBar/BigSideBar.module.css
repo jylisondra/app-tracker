@@ -1,6 +1,7 @@
 .big_sidebar {
   position: fixed;
-  height: 100vh;
+  top: 5rem;
+  height: calc(100vh - 5rem);
   width: 14em;
   background: #19223b;
   color: white;
@@ -35,7 +36,7 @@
   display: flex;
   align-items: center;
   position: absolute;
-  bottom: 5rem;
+  bottom: 4rem;
   left: 1.3rem;
   background: #9c7cf6;
   width: 80%;
