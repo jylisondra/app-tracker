@@ -13,6 +13,7 @@ import {
   CREATE_JOB_SUCCESS,
   CREATE_JOB_ERROR,
   CLEAR_VALUES,
+  CLEAR_FILTERS,
   SET_EDIT_JOB,
   EDIT_JOB_BEGIN,
   EDIT_JOB_SUCCESS,
@@ -230,6 +231,13 @@ const reducer = (state, action) => {
         isLoading: false,
         stats: action.payload.stats,
         monthlyApps: action.payload.monthlyApps,
+      };
+    case CLEAR_FILTERS:
+      return {
+        ...state,
+        search: '',
+        searchStatus: 'all',
+        sort: 'latest',
       };
       return { ...state, ...initialState };
     default:

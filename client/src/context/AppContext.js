@@ -26,6 +26,7 @@ import {
   SHOW_STATS_BEGIN,
   SHOW_STATS_SUCCESS,
   CLEAR_VALUES,
+  CLEAR_FILTERS,
   GET_JOBS_BEGIN,
   GET_JOBS_SUCCESS,
 } from './actions';
@@ -58,6 +59,11 @@ const initialState = {
   numPages: 1,
   stats: {},
   monthlyApps: [],
+  search: '',
+  searchStatus: 'all',
+  searchType: 'all',
+  sort: 'latest',
+  sortOptions: ['latest', 'oldest', 'a-z', 'z-a'],
   showSidebar: true,
 };
 
@@ -100,6 +106,17 @@ const AppProvider = ({ children }) => {
     clearAlert();
   };
 
+  const addUserToLocalStorage = ({ user, token }) => {
+    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('token', token);
+  };
+
+  const removeUserFromLocalStorage = () => {
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+  };
+
+  /* Alert Contexts */
   const displayAlertConfirm = () => {
     dispatch({ type: DISPLAY_ALERT_CONFIRM });
   };
@@ -112,16 +129,6 @@ const AppProvider = ({ children }) => {
 
   const toggleSidebar = () => {
     dispatch({ type: TOGGLE_SIDEBAR });
-  };
-
-  const addUserToLocalStorage = ({ user, token }) => {
-    localStorage.setItem('user', JSON.stringify(user));
-    localStorage.setItem('token', token);
-  };
-
-  const removeUserFromLocalStorage = () => {
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
   };
 
   /* User Contexts */
@@ -255,11 +262,14 @@ const AppProvider = ({ children }) => {
   };
 
   const getJobs = async () => {
-    let url = `/jobs`;
+    const { search, searchStatus, sort } = state;
+    let url = `/jobs?status=${searchStatus}&sort=${sort}`;
+    if (search) {
+      url = url + `&search=${search}`;
+    }
     dispatch({ type: GET_JOBS_BEGIN });
     try {
       const { data } = await authFetch(url);
-      console.log(data);
       const { jobs, totalJobs, numPages } = data;
       dispatch({
         type: GET_JOBS_SUCCESS,
@@ -293,7 +303,13 @@ const AppProvider = ({ children }) => {
           monthlyApps: data.monthlyApps,
         },
       });
-    } catch (error) {}
+    } catch (error) {
+      logoutUser();
+    }
+  };
+  /* Search/Sort contexts */
+  const clearFilters = () => {
+    dispatch({ type: CLEAR_FILTERS });
   };
 
   return (
@@ -315,6 +331,7 @@ const AppProvider = ({ children }) => {
         getJobs,
         toggleFavorite,
         showStats,
+        clearFilters,
       }}
     >
       {children}
