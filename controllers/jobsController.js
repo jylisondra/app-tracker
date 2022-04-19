@@ -1,7 +1,6 @@
 import Job from '../models/job.js';
 import { StatusCodes } from 'http-status-codes';
 import BadRequestError from '../errors/BadRequest.js';
-import UnauthorizedError from '../errors/Unauthorized.js';
 import NotFoundError from '../errors/NotFound.js';
 import checkPermissions from '../utils/checkPermissions.js';
 import mongoose from 'mongoose';
@@ -30,10 +29,43 @@ const deleteJob = async (req, res) => {
 };
 
 const getAllJobs = async (req, res) => {
-  const jobs = await Job.find({ createdBy: req.user.userId });
-  res
-    .status(StatusCodes.OK)
-    .json({ jobs, totalJobs: jobs.length, numPages: 1 });
+  const { search, status, sort } = req.query;
+  const queryObject = {
+    createdBy: req.user.userId,
+  };
+  if (status !== 'all') {
+    queryObject.status = status;
+  }
+  if (search) {
+    //queryObject.company = { $regex: search, $options: 'i' };
+    queryObject.position = { $regex: search, $options: 'i' };
+  }
+  //sort
+  let result = Job.find(queryObject);
+  if (sort === 'latest') {
+    result = result.sort('-dateApplied');
+  }
+  if (sort === 'oldest') {
+    result = result.sort('dateApplied');
+  }
+  if (sort === 'a-z') {
+    result = result.sort('company');
+  }
+  if (sort === 'z-a') {
+    result = result.sort('-company');
+  }
+
+  //pagination
+  const page = Number(req.query.page) || 1;
+  const limit = Number(req.query.limit) || 10;
+  const skip = (page - 1) * limit;
+  result = result.skip(skip).limit(limit);
+
+  const jobs = await result;
+
+  const totalJobs = await Job.countDocuments(queryObject);
+  const numPages = Math.ceil(totalJobs / limit);
+  res.status(StatusCodes.OK).json({ jobs, totalJobs, numPages });
 };
 
 const updateJob = async (req, res) => {
@@ -71,6 +103,7 @@ const showStats = async (req, res) => {
     interviewing: stats.interviewing || 0,
     rejected: stats.rejected || 0,
   };
+
   let monthlyApps = await Job.aggregate([
     { $match: { createdBy: mongoose.Types.ObjectId(req.user.userId) } },
     {
@@ -92,6 +125,7 @@ const showStats = async (req, res) => {
       $limit: 5,
     },
   ]);
+
   monthlyApps = monthlyApps
     .map((item) => {
       const {

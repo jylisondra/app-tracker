@@ -12,6 +12,7 @@ import connectDB from './db/connect.js';
 // routers
 import authRouter from './routes/authRoutes.js';
 import jobsRouter from './routes/jobsRoutes.js';
+import interviewsRouter from './routes/interviewsRoutes.js';
 
 // middleware
 import notFoundMiddleware from './middleware/notFound.js';
@@ -34,6 +35,7 @@ app.get('/api/v1', (req, res) => {
 
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/jobs', authenticateUser, jobsRouter);
+app.use('/api/vi/interviews', authenticateUser, interviewsRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandler);
