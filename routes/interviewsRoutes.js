@@ -1,14 +1,14 @@
 import express from 'express';
 import {
   createInterview,
-  updateInterivew,
+  updateInterview,
   deleteInterview,
   getAllInterviews,
-} from '../controllers/interviewsController';
+} from '../controllers/interviewsController.js';
 
 const router = express.Router();
 
 router.route('/').post(createInterview).get(getAllInterviews);
-router.route('/:id').patch(updateInterivew).delete(deleteInterview);
+router.route('/:id').patch(updateInterview).delete(deleteInterview);
 
 export default router;
