@@ -5,10 +5,6 @@ import NotFoundError from '../errors/NotFound.js';
 import checkPermissions from '../utils/checkPermissions.js';
 
 const createInterview = async (req, res) => {
-  const { company, position } = req.body;
-  if (!company || !position) {
-    throw new BadRequestError('Missing fields');
-  }
   req.body.createdBy = req.user.userId;
   const interview = await Interview.create(req.body);
   res.status(StatusCodes.CREATED).json({ interview });
@@ -16,10 +12,6 @@ const createInterview = async (req, res) => {
 
 const updateInterview = async (req, res) => {
   const { id: interviewId } = req.params;
-  const { company, position } = req.body;
-  if (!company || !position) {
-    throw new BadRequestError('Missing fields');
-  }
   const interview = await Interview.findOne({ _id: interviewId });
   checkPermissions(req.user, interview.createdBy);
   const updatedInterview = await Interview.findOneAndUpdate(
@@ -58,18 +50,18 @@ const getAllInterviews = async (req, res) => {
   }
   //sort
   let result = Interview.find(queryObject);
-  if (sort === 'latest') {
-    result = result.sort('-dateApplied');
-  }
-  if (sort === 'oldest') {
-    result = result.sort('dateApplied');
-  }
-  if (sort === 'a-z') {
-    result = result.sort('company');
-  }
-  if (sort === 'z-a') {
-    result = result.sort('-company');
-  }
+  // if (sort === 'latest') {
+  //   result = result.sort('-dateApplied');
+  // }
+  // if (sort === 'oldest') {
+  //   result = result.sort('dateApplied');
+  // }
+  // if (sort === 'a-z') {
+  //   result = result.sort('company');
+  // }
+  // if (sort === 'z-a') {
+  //   result = result.sort('-company');
+  // }
 
   //pagination
   const page = Number(req.query.page) || 1;

@@ -25,6 +25,11 @@ import {
   TOGGLE_FAVORITE,
   SHOW_STATS_BEGIN,
   SHOW_STATS_SUCCESS,
+  CREATE_INTERVIEW_BEGIN,
+  CREATE_INTERVIEW_SUCCESS,
+  CREATE_INTERVIEW_ERROR,
+  GET_INTERVIEWS_BEGIN,
+  GET_INTERVIEWS_SUCCESS,
   LOGOUT_USER,
 } from './actions';
 
@@ -206,6 +211,40 @@ const reducer = (state, action) => {
       return {
         ...state,
         isFavorite: !state.isFavorite,
+      };
+    case CREATE_INTERVIEW_BEGIN:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case CREATE_INTERVIEW_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        showAlert: true,
+        alertType: 'success',
+        alertText: 'Interview Successfully Added',
+      };
+    case CREATE_INTERVIEW_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        showAlert: true,
+        alertType: 'danger',
+        alertText: action.payload.msg,
+      };
+    case GET_INTERVIEWS_BEGIN:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case GET_INTERVIEWS_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        interviews: action.payload.interviews,
+        totalInterviews: action.payload.totalInterviews,
+        numPages: action.payload.numPages,
       };
     case CLEAR_VALUES:
       const initialState = {
