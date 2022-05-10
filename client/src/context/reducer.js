@@ -220,6 +220,7 @@ const reducer = (state, action) => {
         companyURL: '',
       };
       return { ...state, ...initialState };
+
     case SHOW_STATS_BEGIN:
       return {
         ...state,
