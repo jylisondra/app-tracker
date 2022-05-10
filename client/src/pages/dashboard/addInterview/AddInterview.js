@@ -10,13 +10,15 @@ export default function AddInterview() {
     interviewTypeOptions,
     notes,
     handleChange,
-    createInterview,
+    addInterview,
     clearValues,
+    company,
+    position,
   } = useAppContext();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    createInterview();
+    addInterview();
     clearValues();
   };
   const handleInterviewInput = (e) => {
@@ -26,6 +28,8 @@ export default function AddInterview() {
   return (
     <form onSubmit={handleSubmit}>
       <h3>Add Interview</h3>
+      <p>Company: {company}</p>
+      <p>Position: {position}</p>
       <FormRow
         label="Interview Date"
         name="interviewDate"

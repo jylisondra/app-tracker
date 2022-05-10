@@ -7,25 +7,25 @@
 .navlink {
   display: flex;
   align-items: center;
-  color: white;
+  color: var(--color-font-primary);
   text-decoration: none;
   padding: 0.5em;
   font-size: 1.1rem;
   margin: 0.4rem;
   transition: 0.2s ease;
   width: 80%;
+  border-radius: 5px;
 }
 
 .navlink:hover,
 .navlink.active:hover {
-  background: #9c7cf6;
+  background: var(--color-brand-primary);
   transition: 0.2s ease;
-  border-radius: 5px;
-  color: white;
+  color: var(--color-font-primary);
 }
 
 .navlink.active {
-  color: #9c7cf6;
+  background: var(--color-brand-primary);
   font-weight: bold;
 }
 

@@ -2,13 +2,33 @@
   margin-bottom: 1em;
 }
 
-.form input {
-  width: 350px;
+.form {
+  background: var(--color-bg-secondary);
+  border-radius: 5px;
+  padding: 1.5rem 2rem;
+  box-shadow: var(--box-shadow);
+}
+
+.form_center {
+  column-gap: 3rem;
 }
 
 .btn_submit {
   padding: 0.4em;
-  background: #9c7cf6;
+  background: var(--color-brand-primary);
   border-radius: 5px;
-  color: white;
+  color: var(--color-font-primary);
+}
+
+@media screen and (min-width: 810px) {
+  .form_center {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media screen and (min-width: 1100px) {
+  .form_center {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }

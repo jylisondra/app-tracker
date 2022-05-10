@@ -22,7 +22,7 @@ export default function landing() {
           </Link>
         </div>
         <div className={`${styles.main_img} ${styles.img}`}>
-          <img src={main} alt="Jobbr" />
+          <img src={main} alt="AppTrak" />
         </div>
       </div>
     </main>

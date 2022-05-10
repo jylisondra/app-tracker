@@ -1,3 +1,13 @@
+.result {
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+}
+
 @media screen and (max-width: 820px) {
   .jobs_container {
     display: grid;

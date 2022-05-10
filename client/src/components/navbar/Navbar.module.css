@@ -1,6 +1,6 @@
 .navbar {
   height: 5rem;
-  background: #19223b;
+  background: var(--color-bg-secondary);
   display: flex;
   align-items: center;
   position: sticky;
@@ -11,7 +11,7 @@
 }
 
 .btn_toggle {
-  color: white;
+  color: var(--color-font-primary);
   font-size: 2rem;
   padding-left: 10px;
 }
@@ -26,12 +26,12 @@
   font-size: 3em;
   font-weight: bold;
   display: flex;
-  color: white;
+  color: var(--color-font-primary);
   height: 5rem;
 }
 
 .logo span {
-  color: #9c7cf6;
+  color: var(--color-brand-primary);
 }
 
 .active_sidebar {
@@ -47,7 +47,7 @@
   margin-left: auto;
   margin-right: 5.5em;
   padding: 0.2em;
-  background: #9c7cf6;
+  background: var(--color-brand-primary);
   border-radius: 5px;
 }
 
@@ -55,7 +55,7 @@
   display: flex;
   height: 2.5rem;
   align-items: center;
-  color: white;
+  color: var(--color-font-primary);
   font-size: 1.2rem;
 }
 
@@ -83,6 +83,6 @@
 }
 
 .show_dropdown:hover {
-  background: #a88fee;
+  background: var(--color-brand-secondary);
   transition: 0.1s ease;
 }

@@ -8,6 +8,24 @@
 
 :root {
   /* colors */
+  --color-bg-primary: #25304d;
+  --color-bg-secondary: #19223b;
+  --color-card-primary: #ffff;
+  --color-brand-primary: #9c7cf6;
+  --color-brand-secondary: #a88fee;
+  --color-alert-confirm: #97d397;
+  --color-alert-danger: #d12727;
+  --color-pending-primary: #f1cf76;
+  --color-pending-secondary: #5a4406;
+  --color-interview-primary: #7dd5f0;
+  --color-interview-secondary: #121236;
+  --color-declined-primary: #e64242;
+  --color-declined-secondary: #640a0a;
+  --color-font-primary: #e8eaee;
+  /* --color-font-secondary:  */
+
+  --box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+
   --bg-blue: #25304d;
   --nav-blue: #dae0f0;
   --card-bg: #ffffff;

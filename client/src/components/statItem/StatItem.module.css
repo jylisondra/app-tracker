@@ -3,17 +3,17 @@
   border-radius: 5px;
   padding-top: 1rem;
   padding-left: 1rem;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  box-shadow: var(--box-shadow);
 }
 
 .card:first-child {
-  color: rgb(240, 203, 104);
+  color: var(--color-pending-primary);
 }
 .card:nth-child(2) {
-  color: rgb(125, 213, 240);
+  color: var(--color-interview-primary);
 }
 .card:last-child {
-  color: rgb(230, 66, 66);
+  color: var(--color-declined-primary);
 }
 .icon {
   font-size: 1.1rem;
@@ -24,11 +24,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
+  color: var(--color-font-primary);
 }
 
 .title {
-  color: white;
+  color: var(--color-font-primary);
   font-size: 1rem;
   text-transform: capitalize;
 }

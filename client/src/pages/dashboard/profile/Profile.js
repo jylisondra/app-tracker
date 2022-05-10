@@ -22,31 +22,33 @@ export default function Profile() {
     updateUser({ firstName, lastName, email });
   };
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
-      <h2 className={styles.title}>Profile</h2>
-      {showAlert && <Alert />}
-      <div className={styles.formCenter}>
-        <FormRow
-          labelName="First Name"
-          type="text"
-          name="firstName"
-          value={firstName}
-          handleChange={(e) => setFirstName(e.target.value)}
-        />
-        <FormRow
-          labelName="Last Name"
-          type="text"
-          name="lastName"
-          value={lastName}
-          handleChange={(e) => setLastName(e.target.value)}
-        />
-        <FormRow
-          labelName="Email"
-          type="text"
-          name="email"
-          value={email}
-          handleChange={(e) => setEmail(e.target.value)}
-        />
+    <>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <h2 className={styles.title}>Profile</h2>
+        {showAlert && <Alert />}
+        <div className={styles.form_center}>
+          <FormRow
+            labelName="First Name"
+            type="text"
+            name="firstName"
+            value={firstName}
+            handleChange={(e) => setFirstName(e.target.value)}
+          />
+          <FormRow
+            labelName="Last Name"
+            type="text"
+            name="lastName"
+            value={lastName}
+            handleChange={(e) => setLastName(e.target.value)}
+          />
+          <FormRow
+            labelName="Email"
+            type="text"
+            name="email"
+            value={email}
+            handleChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
         <button
           className={styles.btn_submit}
           type="submit"
@@ -54,7 +56,7 @@ export default function Profile() {
         >
           {isLoading ? 'Please Wait...' : 'Save Changes'}
         </button>
-      </div>
-    </form>
+      </form>
+    </>
   );
 }

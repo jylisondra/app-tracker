@@ -3,7 +3,7 @@
   top: 5rem;
   height: calc(100vh - 5rem);
   width: 14em;
-  background: #19223b;
+  background: var(--color-bg-secondary);
   color: white;
   margin-left: -14em;
   transition: 0.2s ease;
@@ -17,14 +17,14 @@
   font-size: 3em;
   font-weight: bold;
   display: flex;
-  color: white;
+  color: var(--color-font-primary);
   display: flex;
   justify-content: center;
   height: 5rem;
 }
 
 .big_sidebar_header span {
-  color: #9c7cf6;
+  color: var(--color-brand-primary);
 }
 
 .show_sidebar {
@@ -38,18 +38,18 @@
   position: absolute;
   bottom: 4rem;
   left: 1.3rem;
-  background: #9c7cf6;
+  background: var(--color-brand-primary);
   width: 80%;
   border-radius: 5px;
   font-size: 1.1rem;
   padding: 0.5em;
-  color: white;
+  color: var(--color-font-primary);
 }
 
 .add_container span {
   margin-left: 1.5rem;
   text-decoration: none;
-  color: white;
+  color: var(--color-font-primary);
 }
 
 .add_container:hover {

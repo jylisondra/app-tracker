@@ -6,21 +6,21 @@
 }
 
 .card {
-  background: white;
+  background: var(--color-bg-secondary);
   width: 650px;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 40px;
   border-radius: 8px;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  box-shadow: var(--box-shadow);
 }
 
 .logo {
   font-family: var(--heading-font);
   font-size: 3.7em;
   font-weight: bold;
-  color: var(--button-bg);
+  color: var(--color-brand-primary);
   padding-bottom: 16px;
 }
 
@@ -46,7 +46,7 @@ h1 {
   border: none;
   background: none;
   font: inherit;
-  color: var(--button-bg);
+  color: var(--color-brand-primary);
 }
 .btn_submit {
   border: none;
@@ -54,13 +54,13 @@ h1 {
   padding: 10px 80px;
   margin-bottom: 18px;
   color: white;
-  background-color: var(--button-bg);
+  background-color: var(--color-brand-primary);
   border-radius: 8px;
   transition: 200ms ease-in-out;
 }
 
 .btn_submit:hover {
-  background-color: var(--button-hover);
+  background-color: var(--color-brand-secondary);
   transition: 200ms ease-in-out;
 }
 

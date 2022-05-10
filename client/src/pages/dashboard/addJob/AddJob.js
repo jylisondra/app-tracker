@@ -48,8 +48,8 @@ export default function AddJob() {
 
   return (
     <>
-      <h2 className={styles.title}>{isEditing ? 'Edit Job' : 'Add Job'}</h2>
       <form className={styles.form} onSubmit={handleSubmit}>
+        <h2 className={styles.title}>{isEditing ? 'Edit Job' : 'Add Job'}</h2>
         {showAlert && <Alert />}
         <div className={styles.form_center}>
           <FormRow
@@ -107,7 +107,15 @@ export default function AddJob() {
         <button className={`${styles.btn} ${styles.btn_submit}`} type="submit">
           Submit
         </button>
-        <Link className={`${styles.btn} ${styles.link}`} to="/jobs">
+        <Link
+          className={`${styles.btn} ${styles.link}`}
+          to={{
+            pathname: '/jobs/',
+            state: {
+              isEditing: false,
+            },
+          }}
+        >
           Cancel
         </Link>
       </form>
