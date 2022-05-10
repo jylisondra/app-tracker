@@ -1,3 +1,3 @@
-# Job App Tracker
+# Jobly
 
 Job application and management system
