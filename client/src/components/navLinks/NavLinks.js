@@ -17,7 +17,7 @@ export default function NavLinks() {
               classnames(styles.navlink, isActive ? styles.active : '')
             }
           >
-            {icon}
+            <div className={styles.icon}>{icon}</div>
             <span className={styles.link_name}>{text}</span>
           </NavLink>
         );

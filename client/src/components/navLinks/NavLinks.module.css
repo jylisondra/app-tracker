@@ -17,6 +17,10 @@
   border-radius: 5px;
 }
 
+.icon {
+  font-size: 1.5rem;
+}
+
 .navlink:hover,
 .navlink.active:hover {
   background: var(--color-brand-primary);
