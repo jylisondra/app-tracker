@@ -109,6 +109,7 @@ export default function AddJob() {
         </button>
         <Link
           className={`${styles.btn} ${styles.link}`}
+          onClick={() => clearValues()}
           to={{
             pathname: '/jobs/',
             state: {
