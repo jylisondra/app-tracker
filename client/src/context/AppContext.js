@@ -29,11 +29,6 @@ import {
   CLEAR_FILTERS,
   GET_JOBS_BEGIN,
   GET_JOBS_SUCCESS,
-  CREATE_INTERVIEW_BEGIN,
-  CREATE_INTERVIEW_SUCCESS,
-  CREATE_INTERVIEW_ERROR,
-  GET_INTERVIEWS_BEGIN,
-  GET_INTERVIEWS_SUCCESS,
 } from './actions';
 
 const token = localStorage.getItem('token');
@@ -64,6 +59,7 @@ const initialState = {
   interviewTypeOptions: ['phone-screen', 'on-site', 'technical', 'behavioral'],
   notes: '',
   interviews: [],
+  jobInterviewId: '',
   totalInterviews: 0,
   totalJobs: 0,
   page: 1,
@@ -294,49 +290,13 @@ const AppProvider = ({ children }) => {
   const toggleFavorite = (currentJob) => {
     dispatch({ type: TOGGLE_FAVORITE });
   };
+
   const clearValues = () => {
     dispatch({ type: CLEAR_VALUES });
   };
 
   const handleChange = ({ name, value }) => {
     dispatch({ type: HANDLE_CHANGE, payload: { name, value } });
-  };
-
-  /* Interview contexts */
-  const createInterview = async () => {
-    dispatch({ type: CREATE_INTERVIEW_BEGIN });
-    try {
-      const { interviewDate, interviewType, notes } = state;
-      await authFetch.post('/interviews', {
-        interviewDate,
-        interviewType,
-        notes,
-      });
-      console.log('interview created');
-      dispatch({ type: CREATE_INTERVIEW_SUCCESS });
-    } catch (error) {
-      if (error.response.status === 401) return;
-      dispatch({
-        type: CREATE_INTERVIEW_ERROR,
-        payload: { msg: error.response.data.msg },
-      });
-    }
-    clearAlert();
-  };
-
-  const getInterviews = async () => {
-    dispatch({ tyle: GET_INTERVIEWS_BEGIN });
-    let url = `/interviews`;
-    try {
-      const { data } = await authFetch(url);
-      const { interviews, totalInterviews, numPages } = data;
-      dispatch({
-        type: GET_INTERVIEWS_SUCCESS,
-        payload: { interviews, totalInterviews, numPages },
-      });
-    } catch (error) {
-      //logoutUser();
-    }
   };
 
   /* Stats contexts */
@@ -375,8 +335,6 @@ const AppProvider = ({ children }) => {
         setEditJob,
         editJob,
         deleteJob,
-        createInterview,
-        getInterviews,
         clearValues,
         getJobs,
         toggleFavorite,
