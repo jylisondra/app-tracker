@@ -16,6 +16,7 @@ export default function Register() {
   const navigate = useNavigate();
   // local values
   const [values, setValues] = useState(initialState);
+  const [guest, setGuest] = useState(false);
   // global values
   const { user, isLoading, showAlert, displayAlertDanger, setupUser } =
     useAppContext();
@@ -41,6 +42,16 @@ export default function Register() {
     } else {
       setupUser(currentUser, 'register');
     }
+  };
+
+  const handleGuest = () => {
+    const currentUser = {
+      firstName: 'guest',
+      email: 'guest@guest.com',
+      password: 'guest123',
+    };
+    setupUser(currentUser, 'login');
+    setGuest(!guest);
   };
 
   useEffect(() => {
@@ -124,6 +135,7 @@ export default function Register() {
           <button
             type="button"
             className={`${styles.btn_link} ${styles.btn_guest} ${styles.btn}`}
+            onClick={handleGuest}
           >
             Guest
           </button>
