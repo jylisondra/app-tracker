@@ -14,6 +14,7 @@ import {
   CREATE_JOB_ERROR,
   CLEAR_VALUES,
   CLEAR_FILTERS,
+  CHANGE_PAGE,
   SET_EDIT_JOB,
   EDIT_JOB_BEGIN,
   EDIT_JOB_SUCCESS,
@@ -116,6 +117,7 @@ const reducer = (state, action) => {
     case HANDLE_CHANGE:
       return {
         ...state,
+        page: 1,
         [action.payload.name]: action.payload.value,
       };
     case CREATE_JOB_BEGIN:
@@ -240,6 +242,12 @@ const reducer = (state, action) => {
         search: '',
         searchStatus: 'all',
         sort: 'latest',
+      };
+
+    case CHANGE_PAGE:
+      return {
+        ...state,
+        page: action.payload.page,
       };
 
     default:

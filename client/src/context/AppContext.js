@@ -26,6 +26,7 @@ import {
   SHOW_STATS_BEGIN,
   SHOW_STATS_SUCCESS,
   CLEAR_VALUES,
+  CHANGE_PAGE,
   CLEAR_FILTERS,
   GET_JOBS_BEGIN,
   GET_JOBS_SUCCESS,
@@ -71,7 +72,8 @@ const initialState = {
   searchType: 'all',
   sort: 'latest',
   sortOptions: ['latest', 'oldest', 'a-z', 'z-a'],
-  showSidebar: true,
+  showSidebar: false,
+  showSmallSidebar: false,
 };
 
 const AppContext = createContext();
@@ -269,8 +271,8 @@ const AppProvider = ({ children }) => {
   };
 
   const getJobs = async () => {
-    const { search, searchStatus, sort } = state;
-    let url = `/jobs?status=${searchStatus}&sort=${sort}`;
+    const { page, search, searchStatus, sort } = state;
+    let url = `/jobs?page=${page}&status=${searchStatus}&sort=${sort}`;
     if (search) {
       url = url + `&search=${search}`;
     }
@@ -320,6 +322,10 @@ const AppProvider = ({ children }) => {
     dispatch({ type: CLEAR_FILTERS });
   };
 
+  const changePage = (page) => {
+    dispatch({ type: CHANGE_PAGE, payload: { page } });
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -340,6 +346,7 @@ const AppProvider = ({ children }) => {
         toggleFavorite,
         showStats,
         clearFilters,
+        changePage,
       }}
     >
       {children}

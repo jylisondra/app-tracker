@@ -28,7 +28,7 @@ export default function SearchContainer() {
     <div className={styles.search_container}>
       <form className={styles.search_form}>
         <FormRow
-          labelName="Search Positions"
+          labelName="Search Jobs"
           type="text"
           name="search"
           value={search}

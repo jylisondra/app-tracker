@@ -1,0 +1,36 @@
+.page_btn_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn_arrow {
+  margin-top: 1rem;
+  display: flex;
+  color: var(--color-font-primary);
+  font-size: 2.4rem;
+}
+
+.page_num_container {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  background: var(--color-bg-secondary);
+  border-radius: 5px;
+}
+
+.page_btn {
+  color: var(--color-font-primary);
+  font-size: 1.4rem;
+  width: 35px;
+  transition: 0.1s ease;
+}
+
+.page_btn:hover {
+  background: var(--color-brand-primary);
+  transition: 0.1s ease;
+}
+
+.active {
+  background: var(--color-brand-primary);
+}
